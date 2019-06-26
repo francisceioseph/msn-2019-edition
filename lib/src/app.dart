@@ -15,7 +15,10 @@ class App extends StatelessWidget {
 
   Route _routes(RouteSettings settings) {
     return MaterialPageRoute(builder: (BuildContext context) {
-      return MainPage();
+      return DefaultTabController(
+        length: 3,
+        child: MainPage(),
+      );
     });
   }
 }

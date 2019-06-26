@@ -3,42 +3,55 @@ import 'package:messanger/src/widgets/main_page/app_bar.dart';
 import 'package:messanger/src/widgets/main_page/conversations.dart';
 import 'package:messanger/src/widgets/main_page/friends_online.dart';
 import 'package:messanger/src/widgets/main_page/separator.dart';
+import 'package:messanger/src/widgets/main_page/tabs/calls_tab.dart';
+import 'package:messanger/src/widgets/main_page/tabs/contacts_tab.dart';
+import 'package:messanger/src/widgets/main_page/tabs/home_tab.dart';
+import 'package:messanger/src/widgets/main_page/tabs/settings_tab.dart';
 
 class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: MainAppBar(),
-      ),
-      body: Container(
-        child: ListView(
-          children: [
-            Separator(
-              text: 'Online (10)',
+    List<Widget> tabs = [
+      HomeTab(),
+      ContactsTab(),
+      CallsTab(),
+      SettingsTab(),
+    ];
+
+    return DefaultTabController(
+      initialIndex: 0,
+      length: tabs.length,
+      child: Scaffold(
+        appBar: AppBar(
+          title: MainAppBar(),
+        ),
+        body: TabBarView(
+          children: tabs,
+        ),
+        bottomNavigationBar: TabBar(
+          tabs: <Widget>[
+            Tab(
+              icon: Icon(Icons.home),
+              text: 'Home',
             ),
-            FriendsOnline(
-              friendsOnline: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0],
+            Tab(
+              icon: Icon(Icons.contacts),
+              text: 'Contacts',
             ),
-            Container(
-              child: FlatButton(
-                child: Text(
-                  'SHOW MORE',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blue,
-                  ),
-                ),
-                onPressed: () {},
-              ),
+            Tab(
+              icon: Icon(Icons.call),
+              text: 'Calls',
             ),
-            Separator(
-              text: 'Chats',
-            ),
-            Conversations(
-              conversations: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0],
-            ),
+            Tab(
+              icon: Icon(Icons.settings),
+              text: 'Settings',
+            )
           ],
+          labelColor: Colors.blue,
+          unselectedLabelColor: Colors.blueGrey,
+          indicatorSize: TabBarIndicatorSize.label,
+          indicatorPadding: EdgeInsets.all(5.0),
+          indicatorColor: Colors.blue,
         ),
       ),
     );
