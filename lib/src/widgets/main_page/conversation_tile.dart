@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:messanger/src/constants.dart';
+import 'package:messanger/src/widgets/list_item_subtitle_2.dart';
+import 'package:messanger/src/widgets/list_item_title.dart';
 import 'package:messanger/src/widgets/status_avatar.dart';
 
 class ConversationTile extends StatelessWidget {
@@ -9,22 +11,11 @@ class ConversationTile extends StatelessWidget {
       leading: StatusAvatar(
         status: kAwayStatus,
       ),
-      title: Text(
-        'Some Name',
-        textAlign: TextAlign.left,
-        style: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
-        ),
+      title: ListItemTitle(
+        text: 'Some User Name',
       ),
-      subtitle: Text(
-        'Some subtitle',
-        textAlign: TextAlign.left,
-        style: TextStyle(
-          fontSize: 12,
-          fontWeight: FontWeight.bold,
-          color: Colors.blue,
-        ),
+      subtitle: ListItemSubtitle2(
+        text: 'My awesome status for you',
       ),
       trailing: Row(
         crossAxisAlignment: CrossAxisAlignment.center,

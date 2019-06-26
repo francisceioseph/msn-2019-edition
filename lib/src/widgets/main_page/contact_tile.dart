@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:messanger/src/constants.dart';
+import 'package:messanger/src/widgets/list_item_subtitle.dart';
+import 'package:messanger/src/widgets/list_item_subtitle_2.dart';
+import 'package:messanger/src/widgets/list_item_title.dart';
 import 'package:messanger/src/widgets/status_avatar.dart';
 
 class ContactListTile extends StatelessWidget {
@@ -11,35 +14,18 @@ class ContactListTile extends StatelessWidget {
         leading: StatusAvatar(
           status: kInvisibleStatus,
         ),
-        title: Text(
-          'Contact Name',
-          textAlign: TextAlign.left,
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-          ),
+        title: ListItemTitle(
+          text: 'Some Contact Name',
         ),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(
-              'status',
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-                color: Colors.blue,
-              ),
+            ListItemSubtitle(
+              text: 'current status',
             ),
-            Text(
-              'my music by someone on Spotify',
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.bold,
-                color: Colors.blue,
-              ),
-            ),
+            ListItemSubtitle2(
+              text: 'my music by someone on Spotify',
+            )
           ],
         ),
         trailing: Icon(
