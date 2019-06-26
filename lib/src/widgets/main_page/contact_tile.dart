@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:messanger/src/widgets/circle_container.dart';
 
 class ContactListTile extends StatelessWidget {
   @override
@@ -6,13 +7,15 @@ class ContactListTile extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(top: 16),
       child: ListTile(
-        leading: CircleAvatar(
-          backgroundColor: Colors.grey[300],
-          child: Text(
-            'CC',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.grey[700],
+        leading: CircleContainer(
+          child: CircleAvatar(
+            backgroundColor: Colors.grey[300],
+            child: Text(
+              'CC',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.grey[700],
+              ),
             ),
           ),
         ),

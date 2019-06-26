@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:messanger/src/widgets/circle_container.dart';
 
 class ConversationTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: CircleAvatar(
-        backgroundColor: Colors.grey[300],
-        child: Text(
-          'CC',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.grey[700],
+      leading: CircleContainer(
+        child: CircleAvatar(
+          backgroundColor: Colors.grey[300],
+          child: Text(
+            'CC',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.grey[700],
+            ),
           ),
         ),
+        borderColor: Colors.grey[500],
       ),
       title: Text(
         'Some Name',
