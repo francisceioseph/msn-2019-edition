@@ -1,22 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:messanger/src/widgets/circle_container.dart';
+import 'package:messanger/src/constants.dart';
+import 'package:messanger/src/widgets/status_avatar.dart';
 
 class FriendTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: CircleContainer(
-        child: CircleAvatar(
-          backgroundColor: Colors.grey[300],
-          child: Text(
-            'CC',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.grey[700],
-            ),
-          ),
-        ),
-        borderColor: Colors.green,
+      leading: StatusAvatar(
+        status: kOnlineStatus,
       ),
       title: Text(
         'Some Name',
