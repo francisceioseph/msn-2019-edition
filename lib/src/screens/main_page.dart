@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:messanger/src/widgets/main_page/app_bar.dart';
-import 'package:messanger/src/widgets/main_page/conversations.dart';
-import 'package:messanger/src/widgets/main_page/friends_online.dart';
-import 'package:messanger/src/widgets/main_page/separator.dart';
 import 'package:messanger/src/widgets/main_page/tabs/calls_tab.dart';
 import 'package:messanger/src/widgets/main_page/tabs/contacts_tab.dart';
 import 'package:messanger/src/widgets/main_page/tabs/home_tab.dart';
