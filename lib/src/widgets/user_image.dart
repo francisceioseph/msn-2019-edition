@@ -9,30 +9,38 @@ class UserImage extends StatelessWidget {
       height: 250,
       child: Stack(
         children: <Widget>[
-          Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("assets/images/placeholder.jpg"),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          Center(
-            child: ClipRect(
-              child: SizedBox(
-                child: BackdropFilter(
-                  filter: ui.ImageFilter.blur(
-                    sigmaX: 5.0,
-                    sigmaY: 5.0,
-                  ),
-                  child: Center(
-                    child: Image.asset('assets/images/placeholder.jpg'),
-                  ),
-                ),
-              ),
-            ),
-          ),
+          _buildBackgroundImage(),
+          _buildUserImage(),
         ],
+      ),
+    );
+  }
+
+  Widget _buildBackgroundImage() {
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("assets/images/placeholder.jpg"),
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildUserImage() {
+    return Center(
+      child: ClipRect(
+        child: SizedBox(
+          child: BackdropFilter(
+            filter: ui.ImageFilter.blur(
+              sigmaX: 5.0,
+              sigmaY: 5.0,
+            ),
+            child: Center(
+              child: Image.asset('assets/images/placeholder.jpg'),
+            ),
+          ),
+        ),
       ),
     );
   }
