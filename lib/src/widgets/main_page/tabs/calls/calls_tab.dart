@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:messanger/src/widgets/main_page/call_list.dart';
+import 'package:messanger/src/widgets/main_page/tabs/calls/call_list.dart';
 
 class CallsTab extends StatelessWidget {
   @override

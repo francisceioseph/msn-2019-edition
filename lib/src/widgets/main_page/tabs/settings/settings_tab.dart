@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:messanger/src/widgets/main_page/settings_list.dart';
+import 'package:messanger/src/widgets/main_page/tabs/settings/settings_list.dart';
 
 class SettingsTab extends StatelessWidget {
   @override

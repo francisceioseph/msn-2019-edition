@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:messanger/src/widgets/main_page/call_tile.dart';
+import 'package:messanger/src/widgets/main_page/tabs/calls/call_tile.dart';
 
 class CallList extends StatelessWidget {
   final List<dynamic> calls;

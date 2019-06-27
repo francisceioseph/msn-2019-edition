@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:messanger/src/widgets/main_page/contact_tile.dart';
+import 'package:messanger/src/widgets/main_page/tabs/contacts/contact_tile.dart';
 
 class ContactList extends StatelessWidget {
   final List<dynamic> contacts;
