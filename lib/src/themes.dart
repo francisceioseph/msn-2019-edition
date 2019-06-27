@@ -15,4 +15,5 @@ final kDarkTheme = ThemeData(
   appBarTheme: AppBarTheme(
     color: Colors.black,
   ),
+  buttonColor: Colors.blue,
 );

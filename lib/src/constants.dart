@@ -11,3 +11,5 @@ const kOfflineStatusColor = Colors.grey;
 const kBusyStatusColor = Color(0xffd32f2f);
 const kAwayStatusColor = Color(0xffffa726);
 const kInvisibleStatusColor = Color(0xffbdbdbd);
+
+const kFollowingButtonColor = Colors.blue;

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:messanger/src/widgets/user_actions.dart';
 import 'package:messanger/src/widgets/user_image.dart';
+import 'package:messanger/src/widgets/user_info.dart';
 
 class UserDescriptior extends StatelessWidget {
   @override
@@ -8,6 +10,8 @@ class UserDescriptior extends StatelessWidget {
       child: Column(
         children: <Widget>[
           UserImage(),
+          UserInfo(),
+          UserActions(),
         ],
       ),
     );

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:messanger/src/widgets/user_descriptor.dart';
+import 'package:messanger/src/widgets/user_music.dart';
+import 'package:messanger/src/widgets/user_status.dart';
 
 class SettingsList extends StatelessWidget {
   @override
@@ -7,6 +9,8 @@ class SettingsList extends StatelessWidget {
     return ListView(
       children: <Widget>[
         UserDescriptior(),
+        UserStatus(),
+        UserMusic(),
       ],
     );
   }
