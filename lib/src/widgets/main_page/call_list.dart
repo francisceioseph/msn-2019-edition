@@ -15,9 +15,12 @@ class CallList extends StatelessWidget {
           return CallListTile();
         },
         separatorBuilder: (BuildContext context, int index) {
-          return Divider(
-            color: Colors.grey[300],
-            height: 1,
+          return Container(
+            padding: EdgeInsets.only(left: 72),
+            child: Divider(
+              color: Colors.grey[300],
+              height: 1,
+            ),
           );
         },
       ),
