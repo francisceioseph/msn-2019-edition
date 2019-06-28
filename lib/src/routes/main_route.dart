@@ -22,7 +22,7 @@ class MainRoute {
   }
 
   static Stream<GuardedRouteStatus> _forwardRouteStream(BuildContext context) {
-    return Provider.of(context).user.map(
+    return AuthProvider.of(context).user.map(
           (user) => user.name == null
               ? GuardedRouteStatus.cannotForward
               : GuardedRouteStatus.canForward,

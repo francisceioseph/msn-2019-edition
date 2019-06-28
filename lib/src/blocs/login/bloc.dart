@@ -3,7 +3,7 @@ import 'package:messanger/src/mixins/validator.dart';
 import 'package:messanger/src/models/user.dart';
 import 'package:rxdart/rxdart.dart';
 
-class Bloc extends Object with ValidationMixin {
+class AuthBloc extends Object with ValidationMixin {
   final _email = BehaviorSubject<String>();
   final _password = BehaviorSubject<String>();
   final _authCtrl = BehaviorSubject<User>(seedValue: User());

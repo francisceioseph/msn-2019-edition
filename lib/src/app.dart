@@ -7,7 +7,7 @@ import 'package:messanger/src/themes.dart';
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Provider(
+    return AuthProvider(
       child: MaterialApp(
         title: 'Messenger',
         theme: kLightTheme,

@@ -1,33 +1,91 @@
 import 'package:flutter/material.dart';
 import 'package:messanger/src/blocs/login/bloc.dart';
 import 'package:messanger/src/blocs/login/provider.dart';
-import 'package:messanger/src/widgets/main_page/app_bar.dart';
+import 'package:messanger/src/widgets/circle_container.dart';
+import 'package:messanger/src/widgets/login/app_bar.dart';
 
 class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final bloc = Provider.of(context);
+    final bloc = AuthProvider.of(context);
 
     return Scaffold(
       appBar: AppBar(
-        title: MainAppBar(),
+        title: LoginAppBar(),
       ),
       body: Container(
-        child: Column(
-          children: <Widget>[
-            emailField(bloc),
-            passwordField(bloc),
-            Container(
-              margin: EdgeInsets.only(top: 25.0),
+        padding: EdgeInsets.only(
+          right: 16,
+          left: 16,
+        ),
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                _buildUserImage(),
+                _buildWelcomeSection(),
+                _buildEmailField(bloc),
+                _buildPasswordField(bloc),
+                Container(
+                  margin: EdgeInsets.only(top: 25.0),
+                ),
+                _buildSubmitButton(bloc),
+              ],
             ),
-            submitButton(bloc),
-          ],
+          ),
         ),
       ),
     );
   }
 
-  Widget emailField(Bloc bloc) {
+  Widget _buildUserImage() {
+    return Container(
+      child: CircleContainer(
+        child: CircleAvatar(
+          radius: 60,
+          backgroundColor: Colors.grey[300],
+          child: Container(
+            padding: EdgeInsets.all(10),
+            child: Image.asset('assets/images/msn_logo.png'),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildWelcomeSection() {
+    return Container(
+      margin: EdgeInsets.only(
+        top: 16,
+      ),
+      child: Wrap(
+        alignment: WrapAlignment.center,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        children: <Widget>[
+          Text(
+            'Sign in with your Windows Live ID. Dont have one?',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.blue,
+            ),
+          ),
+          FlatButton(
+            child: Text(
+              'Sign up',
+              style: TextStyle(
+                color: Colors.blue,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            onPressed: () {},
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildEmailField(AuthBloc bloc) {
     return StreamBuilder(
       stream: bloc.email,
       builder: (context, snapshot) {
@@ -35,7 +93,7 @@ class Login extends StatelessWidget {
           onChanged: bloc.changeEmail,
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
-            hintText: 'you@example.com',
+            hintText: 'name@example.com',
             labelText: 'Email',
             errorText: snapshot.error,
           ),
@@ -44,7 +102,7 @@ class Login extends StatelessWidget {
     );
   }
 
-  Widget passwordField(Bloc bloc) {
+  Widget _buildPasswordField(AuthBloc bloc) {
     return StreamBuilder(
       stream: bloc.password,
       builder: (context, snapshot) {
@@ -61,22 +119,31 @@ class Login extends StatelessWidget {
     );
   }
 
-  Widget submitButton(Bloc bloc) {
+  Widget _buildSubmitButton(AuthBloc bloc) {
     return StreamBuilder(
       stream: bloc.enableSubmit,
       builder: (context, snapshot) {
-        return RaisedButton(
-          child: Text(
-            'LOGIN',
-            style: TextStyle(color: Colors.white),
+        return SizedBox(
+          width: double.infinity,
+          child: OutlineButton(
+            child: Text(
+              'Sign in',
+              style: TextStyle(
+                fontSize: 15,
+                color: Colors.blue,
+              ),
+            ),
+            color: Colors.blue,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            onPressed: snapshot.hasData
+                ? () {
+                    bloc.submit();
+                    Navigator.of(context).pushReplacementNamed('/');
+                  }
+                : null,
           ),
-          color: Colors.blue,
-          onPressed: snapshot.hasData
-              ? () {
-                  bloc.submit();
-                  Navigator.of(context).pushReplacementNamed('/');
-                }
-              : null,
         );
       },
     );
