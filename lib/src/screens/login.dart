@@ -158,9 +158,8 @@ class Login extends StatelessWidget {
     return StreamBuilder(
       stream: bloc.enableSubmit,
       builder: (context, snapshot) {
-        return SizedBox(
-          width: double.infinity,
-          child: OutlineButton(
+        return ListTile(
+          title: OutlineButton(
             child: Text(
               'Sign in',
               style: TextStyle(
@@ -172,6 +171,7 @@ class Login extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),
+            borderSide: BorderSide(color: Colors.blue),
             onPressed: snapshot.hasData
                 ? () {
                     bloc.submit();
