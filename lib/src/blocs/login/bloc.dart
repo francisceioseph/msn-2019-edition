@@ -29,7 +29,7 @@ class AuthBloc extends Object with ValidationMixin {
   }
 
   void login() {
-    _authCtrl.sink.add(User(name: 'fff'));
+    _authCtrl.sink.add(User(name: ''));
   }
 
   void logout() {

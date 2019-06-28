@@ -59,7 +59,7 @@ class _GuardedRouteState extends State<GuardedRoute> {
     return StreamBuilder<GuardedRouteStatus>(
       stream: widget.forwardValidationStream,
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
+        if (!snapshot.hasData) {
           currentWidget = widget.loadingScreen;
           return currentWidget;
         } else if (snapshot.data == GuardedRouteStatus.canForward) {

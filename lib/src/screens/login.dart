@@ -96,6 +96,22 @@ class Login extends StatelessWidget {
             hintText: 'name@example.com',
             labelText: 'Email',
             errorText: snapshot.error,
+            focusedBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(12.0)),
+              borderSide: BorderSide(color: Colors.blue),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(12.0)),
+              borderSide: BorderSide(color: Colors.grey),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(12.0)),
+              borderSide: BorderSide(color: Colors.red),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(12.0)),
+              borderSide: BorderSide(color: Colors.red),
+            ),
           ),
         );
       },
@@ -106,13 +122,32 @@ class Login extends StatelessWidget {
     return StreamBuilder(
       stream: bloc.password,
       builder: (context, snapshot) {
-        return TextField(
-          onChanged: bloc.changePassword,
-          obscureText: true,
-          decoration: InputDecoration(
-            hintText: 'Password',
-            labelText: 'Password',
-            errorText: snapshot.error,
+        return Container(
+          margin: EdgeInsets.only(top: 8),
+          child: TextField(
+            onChanged: bloc.changePassword,
+            obscureText: true,
+            decoration: InputDecoration(
+              hintText: 'Password',
+              labelText: 'Password',
+              errorText: snapshot.error,
+              focusedBorder: OutlineInputBorder(
+                borderRadius: const BorderRadius.all(Radius.circular(12.0)),
+                borderSide: BorderSide(color: Colors.blue),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: const BorderRadius.all(Radius.circular(12.0)),
+                borderSide: BorderSide(color: Colors.grey),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderRadius: const BorderRadius.all(Radius.circular(12.0)),
+                borderSide: BorderSide(color: Colors.red),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderRadius: const BorderRadius.all(Radius.circular(12.0)),
+                borderSide: BorderSide(color: Colors.red),
+              ),
+            ),
           ),
         );
       },
@@ -130,10 +165,10 @@ class Login extends StatelessWidget {
               'Sign in',
               style: TextStyle(
                 fontSize: 15,
-                color: Colors.blue,
               ),
             ),
             color: Colors.blue,
+            textColor: Colors.blue,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),
