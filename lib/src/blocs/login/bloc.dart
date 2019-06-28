@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:messanger/mixins/validator.dart';
+import 'package:messanger/src/mixins/validator.dart';
 import 'package:messanger/src/models/user.dart';
 import 'package:rxdart/rxdart.dart';
 
