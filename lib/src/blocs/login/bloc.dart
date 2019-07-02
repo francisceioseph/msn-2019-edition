@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:messanger/src/mixins/validator.dart';
 import 'package:messanger/src/models/user.dart';
+import 'package:messanger/src/network/login_repository.dart';
 import 'package:rxdart/rxdart.dart';
 
 class AuthBloc extends Object with ValidationMixin {
@@ -19,16 +20,15 @@ class AuthBloc extends Object with ValidationMixin {
   Stream<User> get user => _authCtrl.asBroadcastStream();
 
   void submit() {
-    final validEmail = _email.value;
-    final validPassword = _password.value;
+    final email = _email.value;
+    final password = _password.value;
 
-    print(validEmail);
-    print(validPassword);
-
-    login();
+    login(email, password);
   }
 
-  void login() {
+  void login(String email, String password) async {
+    final loginRepo = LoginRepository();
+    await loginRepo.login(email, password);
     _authCtrl.sink.add(User(name: ''));
   }
 
