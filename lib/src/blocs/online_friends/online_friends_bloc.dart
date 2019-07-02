@@ -1,18 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:rxdart/rxdart.dart';
 
 class OnlineFriendsBloc {
-  final friends = Firestore.instance
-      .collection('friends')
-      .document('slI7OM52EeRc64cXnocaAxhqOrv1')
-      .snapshots()
-      .listen(
-    (doc) {
-      print(doc);
-    },
-  );
+  final Observable<FirebaseUser> currentUser;
 
-  dispose() {
-    friends.cancel();
-  }
+  OnlineFriendsBloc({this.currentUser});
+
+  Observable<dynamic> get friends => currentUser.switchMap((user) {
+        return Firestore.instance
+            .collection('friends')
+            .document(user.uid)
+            .snapshots();
+      });
+
+  dispose() {}
 }

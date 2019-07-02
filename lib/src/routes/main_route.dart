@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:messanger/src/blocs/login/provider.dart';
+import 'package:messanger/src/blocs/app_bloc_provider.dart';
+import 'package:messanger/src/blocs/login/bloc.dart';
 import 'package:messanger/src/guards/guarded_route.dart';
 import 'package:messanger/src/screens/loading.dart';
 import 'package:messanger/src/screens/main_page.dart';
@@ -22,11 +23,13 @@ class MainRoute {
   }
 
   static Stream<GuardedRouteStatus> _forwardRouteStream(BuildContext context) {
-    return AuthProvider.of(context).user.map(
-          (user) => user.name == null
-              ? GuardedRouteStatus.cannotForward
-              : GuardedRouteStatus.canForward,
-        );
+    AuthBloc authBloc = AppBlocProvider.of(context).authBloc;
+
+    return authBloc.user.map(
+      (user) => user == null
+          ? GuardedRouteStatus.cannotForward
+          : GuardedRouteStatus.canForward,
+    );
   }
 
   static void _onCannotForward(BuildContext context) {

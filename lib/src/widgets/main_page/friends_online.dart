@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:messanger/src/blocs/online_friends/online_friends_bloc.dart';
+// import 'package:messanger/src/blocs/app_bloc_provider.dart';
+// import 'package:messanger/src/blocs/online_friends/online_friends_bloc.dart';
 import 'package:messanger/src/widgets/main_page/friend_tile.dart';
 
 class FriendsOnline extends StatelessWidget {
@@ -12,7 +13,13 @@ class FriendsOnline extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    OnlineFriendsBloc();
+    // OnlineFriendsBloc onlineFriendsBloc =
+    //     AppBlocProvider.of(context).onlineFriendsBloc;
+
+    // onlineFriendsBloc.friends.listen((data) {
+    //   print(data);
+    // });
+
     return ListView.builder(
       shrinkWrap: true,
       physics: ClampingScrollPhysics(),

@@ -1,13 +1,13 @@
-import 'dart:async';
-import 'package:messanger/src/mixins/validator.dart';
-import 'package:messanger/src/models/user.dart';
-import 'package:messanger/src/network/login_repository.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:rxdart/rxdart.dart';
+
+import 'package:messanger/src/mixins/validator.dart';
+import 'package:messanger/src/network/login_repository.dart';
 
 class AuthBloc extends Object with ValidationMixin {
   final _email = BehaviorSubject<String>();
   final _password = BehaviorSubject<String>();
-  final _authCtrl = BehaviorSubject<User>(seedValue: User());
+  final _user = BehaviorSubject<FirebaseUser>(seedValue: null);
 
   Function(String) get changeEmail => _email.sink.add;
   Function(String) get changePassword => _password.sink.add;
@@ -17,7 +17,8 @@ class AuthBloc extends Object with ValidationMixin {
       _password.stream.transform(validatePassword);
   Observable<bool> get enableSubmit =>
       Observable.combineLatest2(email, password, (e, p) => true);
-  Stream<User> get user => _authCtrl.asBroadcastStream();
+
+  Observable<FirebaseUser> get user => _user.asBroadcastStream();
 
   void submit() {
     final email = _email.value;
@@ -28,17 +29,17 @@ class AuthBloc extends Object with ValidationMixin {
 
   void login(String email, String password) async {
     final loginRepo = LoginRepository();
-    await loginRepo.login(email, password);
-    _authCtrl.sink.add(User(name: ''));
+    final user = await loginRepo.login(email, password);
+    _user.sink.add(user);
   }
 
   void logout() {
-    _authCtrl.sink.add(User());
+    _user.sink.add(null);
   }
 
   void dispose() {
     _email.close();
     _password.close();
-    _authCtrl.close();
+    _user.close();
   }
 }

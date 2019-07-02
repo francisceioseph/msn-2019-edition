@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:messanger/src/blocs/app_bloc_provider.dart';
 import 'package:messanger/src/blocs/login/bloc.dart';
-import 'package:messanger/src/blocs/login/provider.dart';
 
 class LogoutButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    AuthBloc bloc = AuthProvider.of(context);
+    final AuthBloc bloc = AppBlocProvider.of(context).authBloc;
 
     return Container(
       margin: EdgeInsets.only(

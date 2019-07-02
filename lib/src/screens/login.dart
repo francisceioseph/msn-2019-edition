@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:messanger/src/blocs/app_bloc_provider.dart';
 import 'package:messanger/src/blocs/login/bloc.dart';
-import 'package:messanger/src/blocs/login/provider.dart';
 import 'package:messanger/src/widgets/circle_container.dart';
 import 'package:messanger/src/widgets/login/app_bar.dart';
 
 class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final bloc = AuthProvider.of(context);
+    final bloc = AppBlocProvider.of(context).authBloc;
 
     return Scaffold(
       appBar: AppBar(
