@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-// import 'package:messanger/src/blocs/app_bloc_provider.dart';
-// import 'package:messanger/src/blocs/online_friends/online_friends_bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:messanger/src/blocs/app_bloc_provider.dart';
+import 'package:messanger/src/blocs/online_friends/online_friends_bloc.dart';
+import 'package:messanger/src/widgets/loader.dart';
 import 'package:messanger/src/widgets/main_page/friend_tile.dart';
 
 class FriendsOnline extends StatelessWidget {
@@ -13,19 +15,32 @@ class FriendsOnline extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // OnlineFriendsBloc onlineFriendsBloc =
-    //     AppBlocProvider.of(context).onlineFriendsBloc;
+    OnlineFriendsBloc onlineFriendsBloc =
+        AppBlocProvider.of(context).onlineFriendsBloc;
 
     // onlineFriendsBloc.friends.listen((data) {
     //   print(data);
     // });
 
-    return ListView.builder(
-      shrinkWrap: true,
-      physics: ClampingScrollPhysics(),
-      itemCount: 3,
-      itemBuilder: (BuildContext context, int index) {
-        return FriendTile();
+    return StreamBuilder(
+      stream: onlineFriendsBloc.friends,
+      builder: (
+        BuildContext context,
+        AsyncSnapshot<QuerySnapshot> friendsSnapshot,
+      ) {
+        if (!friendsSnapshot.hasData) {
+          return LoadingIndicator();
+        }
+
+        return ListView.builder(
+          shrinkWrap: true,
+          physics: ClampingScrollPhysics(),
+          itemCount: friendsSnapshot.data.documents.length,
+          itemBuilder: (BuildContext context, int index) {
+            final friend = friendsSnapshot.data.documents[index];
+            return FriendTile();
+          },
+        );
       },
     );
   }

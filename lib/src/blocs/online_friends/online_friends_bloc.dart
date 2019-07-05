@@ -7,12 +7,16 @@ class OnlineFriendsBloc {
 
   OnlineFriendsBloc({this.currentUser});
 
-  Observable<dynamic> get friends => currentUser.switchMap((user) {
-        return Firestore.instance
-            .collection('friends')
-            .document(user.uid)
-            .snapshots();
-      });
+  Observable<QuerySnapshot> get friends => currentUser.switchMap(
+        (user) {
+          return Firestore.instance
+              .collection('users')
+              .document(user.uid)
+              .collection('friends')
+              .where('status', isEqualTo: 'online')
+              .snapshots();
+        },
+      );
 
   dispose() {}
 }
