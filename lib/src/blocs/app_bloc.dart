@@ -1,6 +1,6 @@
-import 'package:messanger/src/blocs/login/bloc.dart';
-import 'package:messanger/src/blocs/online_friends/online_friends_bloc.dart';
-import 'package:messanger/src/blocs/personal_info/personal_info_bloc.dart';
+import 'package:messanger/src/blocs/auth_bloc.dart';
+import 'package:messanger/src/blocs/online_friends_bloc.dart';
+import 'package:messanger/src/blocs/personal_info_bloc.dart';
 
 class AppBloc {
   AuthBloc _authBloc;

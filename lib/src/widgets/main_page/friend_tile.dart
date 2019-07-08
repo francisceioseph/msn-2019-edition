@@ -19,7 +19,7 @@ class FriendTile extends StatelessWidget {
           text: friend.name,
         ),
         subtitle: ListItemSubtitle(
-          text: 'My music by someone on Spotify',
+          text: friend.music,
         ));
   }
 }

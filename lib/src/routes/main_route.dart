@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:messanger/src/blocs/app_bloc_provider.dart';
-import 'package:messanger/src/blocs/login/bloc.dart';
+import 'package:messanger/src/blocs/auth_bloc.dart';
 import 'package:messanger/src/guards/guarded_route.dart';
 import 'package:messanger/src/screens/loading.dart';
 import 'package:messanger/src/screens/main_page.dart';
