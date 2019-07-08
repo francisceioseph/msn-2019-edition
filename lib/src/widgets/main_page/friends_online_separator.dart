@@ -15,7 +15,7 @@ class FriendsOnlineSeparator extends StatelessWidget {
       stream: onlineFriendsBloc.friends,
       builder: (
         BuildContext context,
-        AsyncSnapshot<QuerySnapshot> friendsSnapshot,
+        AsyncSnapshot<List<DocumentSnapshot>> friendsSnapshot,
       ) {
         if (!friendsSnapshot.hasData) {
           return Separator(
@@ -23,8 +23,7 @@ class FriendsOnlineSeparator extends StatelessWidget {
           );
         }
 
-        final numberOfFriendsOnline = friendsSnapshot.data.documents.length;
-
+        final numberOfFriendsOnline = friendsSnapshot.data.length;
         return Separator(
           text: 'Online ($numberOfFriendsOnline)',
         );

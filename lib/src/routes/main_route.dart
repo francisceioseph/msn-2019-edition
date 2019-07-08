@@ -33,6 +33,6 @@ class MainRoute {
   }
 
   static void _onCannotForward(BuildContext context) {
-    Navigator.of(context).pushReplacementNamed('/login');
+    Navigator.of(context).pushNamedAndRemoveUntil('/login', (_) => false);
   }
 }

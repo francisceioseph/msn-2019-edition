@@ -1,22 +1,30 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:messanger/src/repositories/friends_repository.dart';
 import 'package:rxdart/rxdart.dart';
 
 class OnlineFriendsBloc {
-  final Observable<FirebaseUser> currentUser;
+  final _friends = BehaviorSubject<List<DocumentSnapshot>>(seedValue: []);
 
-  OnlineFriendsBloc({this.currentUser});
+  FriendsRepository _repository;
+  StreamSubscription<QuerySnapshot> _onlineFriendsSubscription;
 
-  Observable<QuerySnapshot> get friends => currentUser.switchMap(
-        (user) {
-          return Firestore.instance
-              .collection('users')
-              .document(user.uid)
-              .collection('friends')
-              .where('status', isEqualTo: 'online')
-              .snapshots();
-        },
-      );
+  OnlineFriendsBloc(Observable<FirebaseUser> currentUser) {
+    _repository = FriendsRepository(currentUser: currentUser);
 
-  dispose() {}
+    _onlineFriendsSubscription = _repository.friendsOnline().listen(
+      (snapshot) {
+        _friends.sink.add(snapshot.documents);
+      },
+    );
+  }
+
+  Observable<List<DocumentSnapshot>> get friends => _friends.stream;
+
+  dispose() {
+    _friends.close();
+    _onlineFriendsSubscription.cancel();
+  }
 }

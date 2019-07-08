@@ -175,7 +175,8 @@ class Login extends StatelessWidget {
             onPressed: snapshot.hasData
                 ? () {
                     bloc.submit();
-                    Navigator.of(context).pushReplacementNamed('/');
+                    Navigator.of(context)
+                        .pushNamedAndRemoveUntil('/', (_) => false);
                   }
                 : null,
           ),

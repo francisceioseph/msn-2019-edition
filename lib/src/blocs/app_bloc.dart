@@ -12,9 +12,7 @@ class AppBloc {
     _personalInfoBloc = PersonalInfoBloc(
       currentUser: _authBloc.user,
     );
-    _onlineFriendsBloc = OnlineFriendsBloc(
-      currentUser: _authBloc.user,
-    );
+    _onlineFriendsBloc = OnlineFriendsBloc(_authBloc.user);
   }
 
   AuthBloc get authBloc => _authBloc;

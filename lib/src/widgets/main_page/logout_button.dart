@@ -26,7 +26,8 @@ class LogoutButton extends StatelessWidget {
           ),
           onPressed: () {
             bloc.logout();
-            Navigator.of(context).pushReplacementNamed('/login');
+            Navigator.of(context)
+                .pushNamedAndRemoveUntil('/login', (_) => false);
           },
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),

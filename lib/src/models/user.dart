@@ -1,5 +1,3 @@
-import 'package:messanger/src/models/status.dart';
-
 class User {
   final String name;
   final String imageUrl;

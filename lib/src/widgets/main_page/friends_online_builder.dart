@@ -16,15 +16,14 @@ class FriendsOnlineBuilder extends StatelessWidget {
       stream: onlineFriendsBloc.friends,
       builder: (
         BuildContext context,
-        AsyncSnapshot<QuerySnapshot> friendsSnapshot,
+        AsyncSnapshot<List<DocumentSnapshot>> friendsSnapshot,
       ) {
         if (!friendsSnapshot.hasData) {
           return LoadingIndicator();
         }
 
-        final friendsOnline = friendsSnapshot.data.documents
-            .map((document) => document.data)
-            .toList();
+        final friendsOnline =
+            friendsSnapshot.data.map((document) => document.data).toList();
 
         return FriendsOnline(
           friendsOnline: friendsOnline,
