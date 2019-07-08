@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:messanger/src/constants.dart';
+import 'package:messanger/src/models/user.dart';
 import 'package:messanger/src/widgets/list_item_subtitle.dart';
 import 'package:messanger/src/widgets/list_item_title.dart';
 import 'package:messanger/src/widgets/status_avatar.dart';
 
 class FriendTile extends StatelessWidget {
+  final User friend;
+
+  FriendTile({@required this.friend});
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
         leading: StatusAvatar(
-          status: kOnlineStatus,
+          status: friend.status,
         ),
         title: ListItemTitle(
-          text: 'Some User Name',
+          text: friend.name,
         ),
         subtitle: ListItemSubtitle(
           text: 'My music by someone on Spotify',

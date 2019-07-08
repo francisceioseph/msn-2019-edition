@@ -1,11 +1,10 @@
 import 'package:messanger/src/models/status.dart';
-import 'package:messanger/src/models/user_music.dart';
 
 class User {
   final String name;
   final String imageUrl;
-  final Status status;
-  final UserMusic music;
+  final String status;
+  final String music;
 
   User({
     this.name,
@@ -13,4 +12,10 @@ class User {
     this.status,
     this.music,
   });
+
+  User.fromMap(Map<String, dynamic> userMap)
+      : name = userMap['name'] ?? '',
+        imageUrl = userMap['imageUrl'] ?? '',
+        status = userMap['status'] ?? '',
+        music = userMap['music'] ?? '';
 }
