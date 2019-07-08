@@ -1,8 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:messanger/src/widgets/main_page/conversation_tile.dart';
 
 class Conversations extends StatelessWidget {
-  final List<dynamic> conversations;
+  final List<DocumentSnapshot> conversations;
 
   Conversations({
     Key key,
