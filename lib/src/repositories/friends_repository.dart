@@ -7,6 +7,15 @@ class FriendsRepository {
 
   FriendsRepository({this.currentUser});
 
+  Observable<DocumentSnapshot> fetchFriends() {
+    return currentUser.switchMap((user) {
+      return Firestore.instance
+          .collection('users')
+          .document(user.uid)
+          .snapshots();
+    });
+  }
+
   Stream<QuerySnapshot> friendsOnline() {
     return currentUser.switchMap(
       (user) {

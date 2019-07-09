@@ -1,4 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:messanger/src/blocs/app_bloc_provider.dart';
+import 'package:messanger/src/blocs/friends_bloc.dart';
+import 'package:messanger/src/models/user.dart';
+import 'package:messanger/src/widgets/loader.dart';
 import 'package:messanger/src/widgets/main_page/tabs/contacts/contact_tile.dart';
 
 class ContactList extends StatelessWidget {
@@ -8,13 +13,42 @@ class ContactList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: ListView.builder(
-        itemCount: contacts.length,
-        itemBuilder: (BuildContext context, int index) {
-          return ContactListTile();
-        },
-      ),
-    );
+    final FriendsBloc fb = AppBlocProvider.of(context).friendsBloc;
+    fb.fetchFriends();
+
+    return StreamBuilder(
+        stream: fb.friends,
+        builder: (
+          BuildContext context,
+          AsyncSnapshot<Map<String, Stream<DocumentSnapshot>>> snap,
+        ) {
+          if (!snap.hasData) {
+            return LoadingIndicator();
+          }
+
+          final streams = snap.data.values.toList();
+          return Container(
+            child: ListView.builder(
+              itemCount: streams.length,
+              itemBuilder: (BuildContext context, int index) {
+                return StreamBuilder(
+                    stream: streams[index],
+                    builder: (
+                      BuildContext context,
+                      AsyncSnapshot<DocumentSnapshot> docSnap,
+                    ) {
+                      if (!docSnap.hasData) {
+                        return LoadingIndicator();
+                      }
+
+                      final friend = docSnap.data.data;
+                      return ContactListTile(
+                        user: User.fromMap(friend),
+                      );
+                    });
+              },
+            ),
+          );
+        });
   }
 }
