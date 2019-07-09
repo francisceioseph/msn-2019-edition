@@ -1,9 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:messanger/src/widgets/main_page/conversation_tile.dart';
 
 class Conversations extends StatelessWidget {
-  final List<DocumentSnapshot> conversations;
+  final Map<String, Map<String, dynamic>> conversations;
 
   Conversations({
     Key key,
@@ -12,12 +11,16 @@ class Conversations extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final chats = conversations.values.toList();
+
     return ListView.builder(
       shrinkWrap: true,
       physics: ClampingScrollPhysics(),
-      itemCount: conversations.length,
+      itemCount: chats.length,
       itemBuilder: (BuildContext context, int index) {
-        return ConversationTile();
+        return ConversationTile(
+          conversation: chats[index],
+        );
       },
     );
   }

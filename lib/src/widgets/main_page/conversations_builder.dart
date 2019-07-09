@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:messanger/src/blocs/app_bloc_provider.dart';
 import 'package:messanger/src/blocs/chat_bloc.dart';
@@ -10,21 +9,20 @@ class ConversationsBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ChatBloc chatBloc = AppBlocProvider.of(context).chatBloc;
+    chatBloc.fetchChats();
 
     return StreamBuilder(
       stream: chatBloc.chats,
       builder: (
         BuildContext context,
-        AsyncSnapshot<List<DocumentSnapshot>> chatsSnapshot,
+        AsyncSnapshot<Map<String, Map<String, dynamic>>> chatsSnapshot,
       ) {
         if (!chatsSnapshot.hasData) {
           return LoadingIndicator();
         }
 
-        final chats = chatsSnapshot.data;
-
         return Conversations(
-          conversations: chats,
+          conversations: chatsSnapshot.data,
         );
       },
     );

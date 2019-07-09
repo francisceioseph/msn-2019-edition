@@ -3,39 +3,61 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:messanger/src/repositories/chat_repository.dart';
+import 'package:messanger/src/repositories/user_repository.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ChatBloc {
-  final _chats = BehaviorSubject<List<DocumentSnapshot>>(seedValue: []);
-  final _chat = BehaviorSubject<DocumentSnapshot>(seedValue: null);
+  final _chatFetcher = PublishSubject<DocumentSnapshot>();
+  final _chatOutput = BehaviorSubject<Map<String, Map<String, dynamic>>>();
 
-  ChatRepository _repository;
+  final UserRepository _userRepository = UserRepository();
+  ChatRepository _chatRepository;
   StreamSubscription _chatsSubscription;
 
   ChatBloc(Observable<FirebaseUser> currentUser) {
-    _repository = ChatRepository(currentUser: currentUser);
-    _chatsSubscription = _repository.chats().listen((chats) {
-      _chats.sink.add(chats.documents);
+    _chatRepository = ChatRepository(currentUser: currentUser);
+
+    currentUser.listen((user) {
+      _chatFetcher.transform(_chatTransformer(user.uid)).pipe(_chatOutput);
     });
   }
 
-  Observable<List<DocumentSnapshot>> get chats => _chats.stream;
-  Observable<DocumentSnapshot> get chat => _chat.stream;
+  Observable<Map<String, Map<String, dynamic>>> get chats => _chatOutput.stream;
 
-  fetchChat(String chatId) {
-    StreamSubscription subscription;
+  fetchChats() {
+    _chatRepository.fetchChats().listen((chats) {
+      chats.documents.forEach((chat) {
+        _chatFetcher.sink.add(chat);
+      });
+    });
+  }
 
-    subscription = _repository.fetchChat(chatId).listen(
-      (chat) {
-        _chat.sink.add(chat);
-        subscription.cancel();
+  _chatTransformer(String uid) {
+    return ScanStreamTransformer(
+      (
+        Map<String, Map<String, dynamic>> cache,
+        DocumentSnapshot snap,
+        int index,
+      ) {
+        final chatId = snap.reference.documentID;
+        final data = snap.data;
+        final List<dynamic> attendants = data['attendants'];
+
+        cache[chatId] = data;
+        cache[chatId]['attendants'] = attendants
+            .where((id) => uid != id)
+            .map((userId) => _userRepository.fetchUser(userId))
+            .toList();
+
+        return cache;
       },
+      <String, Map<String, dynamic>>{},
     );
   }
 
   dispose() {
-    _chats.close();
-    _chat.close();
+    _chatOutput.close();
+    _chatFetcher.close();
     _chatsSubscription.cancel();
   }
 }

@@ -7,7 +7,7 @@ import 'package:messanger/src/network/login_repository.dart';
 class AuthBloc extends Object with ValidationMixin {
   final _email = BehaviorSubject<String>();
   final _password = BehaviorSubject<String>();
-  final _user = BehaviorSubject<FirebaseUser>(seedValue: null);
+  final _user = BehaviorSubject<FirebaseUser>();
 
   Function(String) get changeEmail => _email.sink.add;
   Function(String) get changePassword => _password.sink.add;
@@ -18,7 +18,7 @@ class AuthBloc extends Object with ValidationMixin {
   Observable<bool> get enableSubmit =>
       Observable.combineLatest2(email, password, (e, p) => true);
 
-  Observable<FirebaseUser> get user => _user.asBroadcastStream();
+  Observable<FirebaseUser> get user => _user.stream;
 
   void submit() {
     final email = _email.value;

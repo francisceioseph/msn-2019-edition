@@ -7,41 +7,26 @@ class ChatRepository {
 
   ChatRepository({this.currentUser});
 
-  Stream<QuerySnapshot> chats() {
+  Observable<QuerySnapshot> fetchChats() {
     return currentUser.switchMap(
       (user) {
         return Firestore.instance
-            .collection('users')
-            .document(user.uid)
             .collection('chats')
+            .where(
+              'attendants',
+              arrayContains: user.uid,
+            )
             .snapshots();
       },
     );
   }
 
-  Stream<DocumentSnapshot> fetchChat(String chatId) {
+  Observable<DocumentSnapshot> fetchChat(String chatId) {
     return currentUser.switchMap(
       (user) {
         return Firestore.instance
-            .collection('users')
-            .document(user.uid)
             .collection('chats')
             .document(chatId)
-            .snapshots();
-      },
-    );
-  }
-
-  Stream<DocumentSnapshot> attendants(String chatId) {
-    return currentUser.switchMap(
-      (user) {
-        return Firestore.instance
-            .collection('users')
-            .document(user.uid)
-            .collection('chats')
-            .document(chatId)
-            .collection('attendants')
-            .document('users')
             .snapshots();
       },
     );
