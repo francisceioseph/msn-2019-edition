@@ -21,8 +21,7 @@ class ConversationsBuilder extends StatelessWidget {
           return LoadingIndicator();
         }
 
-        final chats =
-            chatsSnapshot.data.map((document) => document.data).toList();
+        final chats = chatsSnapshot.data;
 
         return Conversations(
           conversations: chats,

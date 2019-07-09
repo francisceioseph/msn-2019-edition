@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:messanger/src/widgets/main_page/conversations.dart';
 import 'package:messanger/src/widgets/main_page/conversations_builder.dart';
 import 'package:messanger/src/widgets/main_page/friends_online_builder.dart';
 import 'package:messanger/src/widgets/main_page/friends_online_separator.dart';
