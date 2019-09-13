@@ -3,6 +3,7 @@ import 'package:messanger/src/widgets/main_page/conversations_builder.dart';
 import 'package:messanger/src/widgets/main_page/friends_online_builder.dart';
 import 'package:messanger/src/widgets/main_page/friends_online_separator.dart';
 import 'package:messanger/src/widgets/main_page/separator.dart';
+import 'package:messanger/src/widgets/main_page/show_more_friends_online.dart';
 
 class HomeTab extends StatelessWidget {
   @override
@@ -12,18 +13,7 @@ class HomeTab extends StatelessWidget {
         children: [
           FriendsOnlineSeparator(),
           FriendsOnlineBuilder(),
-          Container(
-            child: FlatButton(
-              child: Text(
-                'SHOW MORE',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blue,
-                ),
-              ),
-              onPressed: () {},
-            ),
-          ),
+          ShowMoreFriendsOnline(),
           Separator(
             text: 'Chats',
           ),

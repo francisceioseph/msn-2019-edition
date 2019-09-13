@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:messanger/src/models/user.dart';
 import 'package:messanger/src/widgets/main_page/friend_tile.dart';
+import 'package:messanger/src/widgets/no_friends_online_yet_indicator.dart';
 
 class FriendsOnline extends StatelessWidget {
   final List<Map<String, dynamic>> friendsOnline;
@@ -12,16 +13,20 @@ class FriendsOnline extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      physics: ClampingScrollPhysics(),
-      itemCount: friendsOnline.length,
-      itemBuilder: (BuildContext context, int index) {
-        final friendMap = friendsOnline[index];
-        return FriendTile(
-          friend: User.fromMap(friendMap),
-        );
-      },
-    );
+    if (friendsOnline.length > 10) {
+      return ListView.builder(
+        shrinkWrap: true,
+        physics: ClampingScrollPhysics(),
+        itemCount: 10,
+        itemBuilder: (BuildContext context, int index) {
+          final friendMap = friendsOnline[index];
+          return FriendTile(
+            friend: User.fromMap(friendMap),
+          );
+        },
+      );
+    }
+
+    return NoFriendsOnlineYetIndicator();
   }
 }

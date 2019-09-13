@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class NoFriendsYetIndicator extends StatelessWidget {
+class NoFriendsOnlineYetIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -12,7 +12,7 @@ class NoFriendsYetIndicator extends StatelessWidget {
             bottom: 24,
           ),
           child: Icon(
-            Icons.nature_people,
+            Icons.signal_wifi_off,
             color: Colors.grey[400],
             size: 80.0,
           ),
@@ -23,7 +23,7 @@ class NoFriendsYetIndicator extends StatelessWidget {
             right: 16,
           ),
           child: Text(
-            'You don\'nt have any friends yet! Add some contacts and start chatting!',
+            'Nobody is online yet :(',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 18.0,
