@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:messanger/src/constants.dart';
 import 'package:messanger/src/models/user.dart';
 import 'package:messanger/src/widgets/list_item_subtitle.dart';
 import 'package:messanger/src/widgets/list_item_subtitle_2.dart';

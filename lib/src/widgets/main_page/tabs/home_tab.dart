@@ -8,7 +8,7 @@ class HomeTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: ListView(
+      child: Column(
         children: [
           FriendsOnlineSeparator(),
           FriendsOnlineBuilder(),

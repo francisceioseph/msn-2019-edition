@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:messanger/src/blocs/app_bloc_provider.dart';
 import 'package:messanger/src/blocs/chat_bloc.dart';
-import 'package:messanger/src/widgets/loader.dart';
 import 'package:messanger/src/widgets/main_page/conversations.dart';
+import 'package:messanger/src/widgets/no_friends_yet_indicator.dart';
 
 class ConversationsBuilder extends StatelessWidget {
   @override
@@ -18,7 +18,9 @@ class ConversationsBuilder extends StatelessWidget {
         AsyncSnapshot<Map<String, Map<String, dynamic>>> chatsSnapshot,
       ) {
         if (!chatsSnapshot.hasData) {
-          return LoadingIndicator();
+          return Expanded(
+            child: NoFriendsYetIndicator(),
+          );
         }
 
         return Conversations(

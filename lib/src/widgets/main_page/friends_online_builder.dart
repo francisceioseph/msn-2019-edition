@@ -3,8 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:messanger/src/blocs/app_bloc_provider.dart';
 import 'package:messanger/src/blocs/friends_bloc.dart';
-import 'package:messanger/src/widgets/loader.dart';
 import 'package:messanger/src/widgets/main_page/friends_online.dart';
+import 'package:messanger/src/widgets/no_friends_yet_indicator.dart';
 
 class FriendsOnlineBuilder extends StatelessWidget {
   @override
@@ -18,7 +18,7 @@ class FriendsOnlineBuilder extends StatelessWidget {
         AsyncSnapshot<List<DocumentSnapshot>> friendsSnapshot,
       ) {
         if (!friendsSnapshot.hasData) {
-          return LoadingIndicator();
+          return NoFriendsYetIndicator();
         }
 
         final friendsOnline =
