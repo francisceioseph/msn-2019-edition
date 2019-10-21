@@ -193,8 +193,10 @@ class Login extends StatelessWidget {
           bloc.submit();
 
           subscription = bloc.user.listen(
-            (data) =>
-                Navigator.of(context).pushNamedAndRemoveUntil('/', (_) => true),
+            (data) {
+              subscription.cancel();
+              Navigator.of(context).pushNamedAndRemoveUntil('/', (_) => false);
+            },
             onError: (error) => _buildErrorAlert(context, error, subscription),
           );
         };
