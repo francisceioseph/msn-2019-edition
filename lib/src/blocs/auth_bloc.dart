@@ -29,8 +29,13 @@ class AuthBloc extends Object with ValidationMixin {
 
   void login(String email, String password) async {
     final loginRepo = LoginRepository();
-    final user = await loginRepo.login(email, password);
-    _user.sink.add(user);
+
+    try {
+      final user = await loginRepo.login(email, password);
+      _user.sink.add(user);
+    } catch(e) {
+      _user.sink.addError(e);
+    }
   }
 
   void logout() {

@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:messanger/src/blocs/app_bloc_provider.dart';
 import 'package:messanger/src/blocs/auth_bloc.dart';
@@ -154,10 +157,48 @@ class Login extends StatelessWidget {
     );
   }
 
+  Future<dynamic> _buildErrorAlert(
+    BuildContext context,
+    dynamic error,
+    StreamSubscription<FirebaseUser> unsub,
+  ) {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Error'),
+          content: Text(
+            "It's not possible to login in now. Please, check your credentials",
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('DISMISS'),
+              onPressed: () {
+                unsub.cancel();
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        );
+      },
+    );
+  }
+
   Widget _buildSubmitButton(AuthBloc bloc) {
     return StreamBuilder(
       stream: bloc.enableSubmit,
       builder: (context, snapshot) {
+        final onSubmit = () {
+          StreamSubscription<FirebaseUser> subscription;
+          bloc.submit();
+
+          subscription = bloc.user.listen(
+            (data) =>
+                Navigator.of(context).pushNamedAndRemoveUntil('/', (_) => true),
+            onError: (error) => _buildErrorAlert(context, error, subscription),
+          );
+        };
+
         return ListTile(
           title: OutlineButton(
             child: Text(
@@ -172,13 +213,7 @@ class Login extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
             ),
             borderSide: BorderSide(color: Colors.blue),
-            onPressed: snapshot.hasData
-                ? () {
-                    bloc.submit();
-                    Navigator.of(context)
-                        .pushNamedAndRemoveUntil('/', (_) => false);
-                  }
-                : null,
+            onPressed: snapshot.hasData ? onSubmit : null,
           ),
         );
       },
