@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:messanger/src/blocs/app_bloc_provider.dart';
 import 'package:messanger/src/routes/main_route.dart';
 import 'package:messanger/src/screens/login.dart';
+import 'package:messanger/src/screens/register.dart';
 import 'package:messanger/src/themes.dart';
 
 class App extends StatelessWidget {
@@ -12,7 +13,7 @@ class App extends StatelessWidget {
         title: 'Messenger',
         theme: kLightTheme,
         darkTheme: kDarkTheme,
-        initialRoute: '/login',
+        initialRoute: '/',
         onGenerateRoute: _routes,
       ),
     );
@@ -23,9 +24,17 @@ class App extends StatelessWidget {
       return MainRoute.build();
     }
 
+    if (settings.name == '/login') {
+      return MaterialPageRoute(
+        builder: (BuildContext context) {
+          return Login();
+        },
+      );
+    }
+
     return MaterialPageRoute(
       builder: (BuildContext context) {
-        return Login();
+        return Register();
       },
     );
   }
