@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:messanger/src/blocs/app_bloc_provider.dart';
+import 'package:messanger/src/widgets/register/register_form.dart';
 
 class Register extends StatelessWidget {
   @override
@@ -8,7 +9,7 @@ class Register extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Register(),
+        title: Text('Register'),
       ),
       body: Container(
         padding: EdgeInsets.only(
@@ -20,6 +21,7 @@ class Register extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+                RegisterForm(),
                 Container(
                   margin: EdgeInsets.only(top: 25.0),
                 ),

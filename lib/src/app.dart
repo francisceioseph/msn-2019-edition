@@ -13,7 +13,7 @@ class App extends StatelessWidget {
         title: 'Messenger',
         theme: kLightTheme,
         darkTheme: kDarkTheme,
-        initialRoute: '/',
+        initialRoute: '/register',
         onGenerateRoute: _routes,
       ),
     );
