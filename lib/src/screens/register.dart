@@ -15,8 +15,7 @@ class Register extends StatelessWidget {
       ),
       body: Container(
         padding: EdgeInsets.only(
-          right: 16,
-          left: 16,
+          top: 16,
         ),
         child: Center(
           child: SingleChildScrollView(
