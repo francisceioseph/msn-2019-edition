@@ -4,8 +4,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:messanger/src/blocs/app_bloc_provider.dart';
 import 'package:messanger/src/blocs/auth_bloc.dart';
-import 'package:messanger/src/widgets/circle_container.dart';
 import 'package:messanger/src/widgets/login/app_bar.dart';
+import 'package:messanger/src/widgets/user/user_image.dart';
+import 'package:messanger/src/widgets/welcome_section.dart';
 
 class Login extends StatelessWidget {
   @override
@@ -26,8 +27,12 @@ class Login extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                _buildUserImage(),
-                _buildWelcomeSection(),
+                UserImage(),
+                WelcomeSection(
+                  welcomeText: 'Sign in with your Windows Live ID. Dont have one?',
+                  sideButtonText: 'Sign Up',
+                  onSideButtonPressed: () {},
+                ),
                 _buildEmailField(bloc),
                 _buildPasswordField(bloc),
                 Container(
@@ -38,52 +43,6 @@ class Login extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildUserImage() {
-    return Container(
-      child: CircleContainer(
-        child: CircleAvatar(
-          radius: 60,
-          backgroundColor: Colors.grey[300],
-          child: Container(
-            padding: EdgeInsets.all(10),
-            child: Image.asset('assets/images/msn_logo.png'),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildWelcomeSection() {
-    return Container(
-      margin: EdgeInsets.only(
-        top: 16,
-      ),
-      child: Wrap(
-        alignment: WrapAlignment.center,
-        crossAxisAlignment: WrapCrossAlignment.center,
-        children: <Widget>[
-          Text(
-            'Sign in with your Windows Live ID. Dont have one?',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.blue,
-            ),
-          ),
-          FlatButton(
-            child: Text(
-              'Sign up',
-              style: TextStyle(
-                color: Colors.blue,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            onPressed: () {},
-          ),
-        ],
       ),
     );
   }
