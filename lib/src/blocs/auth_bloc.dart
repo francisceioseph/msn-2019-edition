@@ -1,10 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:messanger/src/repositories/user_repository.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'package:messanger/src/mixins/validator.dart';
-import 'package:messanger/src/network/login_repository.dart';
+import 'package:messanger/src/repositories/auth_repository.dart';
 
 class AuthBloc extends Object with ValidationMixin {
+  final _authRepository = AuthRepository();
+  final _userRepository = UserRepository();
+
   final _email = BehaviorSubject<String>();
   final _password = BehaviorSubject<String>();
   final _user = BehaviorSubject<FirebaseUser>();
@@ -28,13 +33,34 @@ class AuthBloc extends Object with ValidationMixin {
   }
 
   void login(String email, String password) async {
-    final loginRepo = LoginRepository();
-
     try {
-      final user = await loginRepo.login(email, password);
+      final user = await _authRepository.login(email, password);
       _user.sink.add(user);
-    } catch(e) {
+    } catch (e) {
       _user.sink.addError(e);
+    }
+  }
+
+  void createUser(String name, String email, String password) async {
+    try {
+      final FirebaseUser user =
+          await _authRepository.createUser(email, password);
+
+      final UserUpdateInfo updater = UserUpdateInfo();
+      updater.displayName = name;
+      await user.updateProfile(updater);
+
+      await _userRepository.updateUserInfo(user, {
+        'name': name,
+        'email': email,
+        'friends': [],
+        'music': '',
+        'status': 'online'
+      });
+
+      _user.sink.add(user);
+    } catch (error) {
+      _user.sink.addError(error);
     }
   }
 

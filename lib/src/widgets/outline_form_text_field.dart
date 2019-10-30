@@ -7,6 +7,7 @@ class OutlineFormTextField extends StatelessWidget {
   final String labelText;
   final String Function(String) validator;
   final void Function(String) onFieldSubmitted;
+  final void Function(String) onFieldSaved;
   final TextInputType keyboardType;
   final TextInputAction textInputAction;
   final bool obscureText;
@@ -21,6 +22,7 @@ class OutlineFormTextField extends StatelessWidget {
     this.obscureText = false,
     this.textInputAction = TextInputAction.done,
     this.onFieldSubmitted,
+    this.onFieldSaved,
   }) : super(key: key);
 
   @override
@@ -37,6 +39,7 @@ class OutlineFormTextField extends StatelessWidget {
         textInputAction: this.textInputAction,
         focusNode: this.focusNode,
         onFieldSubmitted: this.onFieldSubmitted,
+        onSaved: this.onFieldSaved,
         decoration: InputDecoration(
           hintText: this.hintText,
           labelText: this.labelText,

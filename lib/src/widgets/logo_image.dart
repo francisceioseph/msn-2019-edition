@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:messanger/src/widgets/circle_container.dart';
 
-class UserImage extends StatelessWidget {
-  const UserImage({
+class LogoImage extends StatelessWidget {
+  const LogoImage({
     Key key,
   }) : super(key: key);
 

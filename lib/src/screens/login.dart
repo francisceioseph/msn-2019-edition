@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:messanger/src/blocs/app_bloc_provider.dart';
 import 'package:messanger/src/blocs/auth_bloc.dart';
 import 'package:messanger/src/widgets/login/app_bar.dart';
-import 'package:messanger/src/widgets/user/user_image.dart';
+import 'package:messanger/src/widgets/logo_image.dart';
 import 'package:messanger/src/widgets/welcome_section.dart';
 
 class Login extends StatelessWidget {
@@ -27,11 +27,17 @@ class Login extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                UserImage(),
+                LogoImage(),
                 WelcomeSection(
-                  welcomeText: 'Sign in with your Windows Live ID. Dont have one?',
+                  welcomeText:
+                      'Sign in with your Windows Live ID. Dont have one?',
                   sideButtonText: 'Sign Up',
-                  onSideButtonPressed: () {},
+                  onSideButtonPressed: () {
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                      '/register',
+                      (_) => false,
+                    );
+                  },
                 ),
                 _buildEmailField(bloc),
                 _buildPasswordField(bloc),
