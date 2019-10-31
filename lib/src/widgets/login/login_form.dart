@@ -7,18 +7,16 @@ import 'package:messanger/src/widgets/loading_dialog.dart';
 import 'package:messanger/src/widgets/outline_form_button.dart';
 import 'package:messanger/src/widgets/outline_form_text_field.dart';
 
-class RegisterForm extends StatefulWidget {
+class LoginForm extends StatefulWidget {
   @override
-  _RegisterFormState createState() => _RegisterFormState();
+  _LoginFormState createState() => _LoginFormState();
 }
 
-class _RegisterFormState extends State<RegisterForm> {
+class _LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
   final _emailFocusNode = FocusNode();
   final _passwordFocusNode = FocusNode();
-  final _passwordConfirmationFocusNode = FocusNode();
 
-  String _displayName;
   String _email;
   String _password;
 
@@ -35,19 +33,6 @@ class _RegisterFormState extends State<RegisterForm> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              OutlineFormTextField(
-                labelText: 'Name',
-                hintText: 'Your full name',
-                keyboardType: TextInputType.text,
-                validator: _validateNameField,
-                textInputAction: TextInputAction.next,
-                onFieldSubmitted: (v) {
-                  _changeFocus(context, _emailFocusNode);
-                },
-                onFieldSaved: (v) {
-                  setState(() => _displayName = v);
-                },
-              ),
               OutlineFormTextField(
                 labelText: 'Email',
                 hintText: 'Your email address',
@@ -67,26 +52,9 @@ class _RegisterFormState extends State<RegisterForm> {
                 hintText: 'Your password',
                 keyboardType: TextInputType.text,
                 obscureText: true,
-                textInputAction: TextInputAction.next,
+                textInputAction: TextInputAction.done,
                 focusNode: _passwordFocusNode,
                 validator: _validatePasswordField,
-                onFieldSubmitted: (v) {
-                  _changeFocus(context, _passwordConfirmationFocusNode);
-                },
-                onFieldSaved: (v) {
-                  setState(() {
-                    _password = v;
-                  });
-                },
-              ),
-              OutlineFormTextField(
-                labelText: 'Password Confirmation',
-                hintText: 'Your password again :)',
-                keyboardType: TextInputType.text,
-                obscureText: true,
-                textInputAction: TextInputAction.done,
-                validator: _validatePasswordConfirmationField,
-                focusNode: _passwordConfirmationFocusNode,
                 onFieldSaved: (v) {
                   setState(() {
                     _password = v;
@@ -94,7 +62,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 },
               ),
               OutlineFormButton(
-                text: 'Sign Up',
+                text: 'Sign In',
                 onPressed: _onSubmit,
               )
             ],
@@ -109,14 +77,6 @@ class _RegisterFormState extends State<RegisterForm> {
     FocusNode focusNode,
   ) {
     FocusScope.of(context).requestFocus(focusNode);
-  }
-
-  String _validateNameField(String value) {
-    if (value.isEmpty) {
-      return 'Name is a required field';
-    }
-
-    return null;
   }
 
   String _validateEmailField(String value) {
@@ -138,18 +98,6 @@ class _RegisterFormState extends State<RegisterForm> {
     return null;
   }
 
-  String _validatePasswordConfirmationField(String value) {
-    if (value.isEmpty) {
-      return 'Password confirmation is a required field';
-    }
-
-    if (value != _password) {
-      return 'Password and password confirmation must be equal';
-    }
-
-    return null;
-  }
-
   void _onSubmit() {
     if (_formKey.currentState.validate()) {
       showDialog(
@@ -164,7 +112,7 @@ class _RegisterFormState extends State<RegisterForm> {
 
       _formKey.currentState.save();
 
-      bloc.createUser(_displayName, _email, _password);
+      bloc.login(_email, _password);
 
       subscription = bloc.user.listen(
         (user) {
@@ -191,7 +139,7 @@ class _RegisterFormState extends State<RegisterForm> {
         return AlertDialog(
           title: Text('Error'),
           content: Text(
-            "It's not possible to sign up now. Please, try again later",
+            "It's not possible to sign in now. Please, try again later",
           ),
           actions: <Widget>[
             FlatButton(

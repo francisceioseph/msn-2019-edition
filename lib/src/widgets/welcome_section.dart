@@ -29,16 +29,17 @@ class WelcomeSection extends StatelessWidget {
               color: Colors.blue,
             ),
           ),
-          FlatButton(
-            child: Text(
-              this.sideButtonText,
-              style: TextStyle(
-                color: Colors.blue,
-                fontWeight: FontWeight.bold,
+          if (this.sideButtonText != null)
+            FlatButton(
+              child: Text(
+                this.sideButtonText,
+                style: TextStyle(
+                  color: Colors.blue,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            onPressed: this.onSideButtonPressed,
-          ),
+              onPressed: this.onSideButtonPressed,
+            )
         ],
       ),
     );

@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:messanger/src/repositories/user_repository.dart';
 import 'package:rxdart/rxdart.dart';

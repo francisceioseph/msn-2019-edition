@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:messanger/src/blocs/app_bloc_provider.dart';
-import 'package:messanger/src/routes/main_route.dart';
+import 'package:messanger/src/blocs/auth_bloc.dart';
+import 'package:messanger/src/screens/home.dart';
 import 'package:messanger/src/screens/login.dart';
+import 'package:messanger/src/screens/main_page.dart';
 import 'package:messanger/src/screens/register.dart';
 import 'package:messanger/src/themes.dart';
+import 'package:messanger/src/widgets/loader.dart';
 
 class App extends StatelessWidget {
   @override
@@ -13,7 +16,7 @@ class App extends StatelessWidget {
         title: 'Messenger',
         theme: kLightTheme,
         darkTheme: kDarkTheme,
-        initialRoute: '/register',
+        initialRoute: '/',
         onGenerateRoute: _routes,
       ),
     );
@@ -21,7 +24,27 @@ class App extends StatelessWidget {
 
   Route _routes(RouteSettings settings) {
     if (settings.name == '/') {
-      return MainRoute.build();
+      return MaterialPageRoute(
+        builder: (BuildContext context) {
+          final AuthBloc authBloc = AppBlocProvider.of(context).authBloc;
+
+          return StreamBuilder(
+            initialData: false,
+            stream: authBloc.user.map((user) => user != null ? true : false),
+            builder: (BuildContext context, AsyncSnapshot<bool> snap) {
+              if (!snap.hasData) {
+                return LoadingIndicator();
+              }
+
+              if (snap.hasError) {
+                return Home();
+              }
+
+              return snap.data == true ? MainPage() : Home();
+            },
+          );
+        },
+      );
     }
 
     if (settings.name == '/login') {
