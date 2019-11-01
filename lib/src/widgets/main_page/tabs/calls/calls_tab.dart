@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:messanger/src/widgets/main_page/tabs/calls/call_list.dart';
+import 'package:messanger/src/widgets/main_page/tabs/calls/call_builder.dart';
 
 class CallsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return CallList(
-      calls: [1, 2, 3, 4, 5, 6],
+    return Column(
+      children: <Widget>[
+        CallsBuilder(),
+      ],
     );
   }
 }
