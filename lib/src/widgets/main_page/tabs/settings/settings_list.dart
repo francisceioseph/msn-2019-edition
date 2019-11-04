@@ -9,7 +9,7 @@ class SettingsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: <Widget>[
-        UserDescriptior(),
+        UserDescriptor(),
         UserStatus(),
         UserMusic(),
         LogoutButton()

@@ -1,8 +1,15 @@
 import 'dart:ui' as ui;
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class UserImage extends StatelessWidget {
+  final FirebaseUser user;
+
+  UserImage({
+    @required this.user,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Container(
