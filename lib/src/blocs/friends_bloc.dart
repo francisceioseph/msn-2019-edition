@@ -8,28 +8,28 @@ import 'package:rxdart/rxdart.dart';
 
 class FriendsBloc {
   final _userRepository = UserRepository();
-  final _onlineFriends = BehaviorSubject<List<DocumentSnapshot>>(seedValue: []);
 
   final _friendsFetcher = PublishSubject<String>();
   final _friendsOutput =
       BehaviorSubject<Map<String, Stream<DocumentSnapshot>>>();
+
+  final _onlineFriendsFetcher = PublishSubject<Map<String, dynamic>>();
+  final _onlineFriendsOutput =
+      BehaviorSubject<Map<String, Map<String, dynamic>>>();
 
   FriendsRepository _friendsRepository;
   StreamSubscription<QuerySnapshot> _onlineFriendsSubscription;
 
   FriendsBloc(Observable<FirebaseUser> currentUser) {
     _friendsRepository = FriendsRepository(currentUser: currentUser);
-
     _friendsFetcher.transform(_transformer()).pipe(_friendsOutput);
-
-    _onlineFriendsSubscription = _friendsRepository.friendsOnline().listen(
-      (snapshot) {
-        _onlineFriends.sink.add(snapshot.documents);
-      },
-    );
+    _onlineFriendsFetcher
+        .transform(_onlineFriendsTransformer())
+        .pipe(_onlineFriendsOutput);
   }
 
-  Observable<List<DocumentSnapshot>> get onlineFriends => _onlineFriends.stream;
+  Observable<Map<String, Map<String, dynamic>>> get onlineFriends =>
+      _onlineFriendsOutput.stream;
 
   Observable<Map<String, Stream<DocumentSnapshot>>> get friends =>
       _friendsOutput.stream;
@@ -38,6 +38,22 @@ class FriendsBloc {
     _friendsRepository.fetchFriends().listen((snap) {
       final friends = snap.data['friends'] as List<dynamic>;
       friends.forEach(_friendsFetcher.sink.add);
+    });
+  }
+
+  fetchOnlineFriends() {
+    _friendsRepository.fetchFriends().listen((snap) {
+      final friends = snap.data['friends'] as List<dynamic>;
+
+      friends.forEach((friendId) {
+        _userRepository.fetchUser(friendId).listen((userSnap) {
+          final user = userSnap.data;
+          if (user['status'] == 'online') {
+            user['uid'] = friendId;
+            _onlineFriendsFetcher.sink.add(user);
+          }
+        });
+      });
     });
   }
 
@@ -55,11 +71,26 @@ class FriendsBloc {
     );
   }
 
+  _onlineFriendsTransformer() {
+    return ScanStreamTransformer(
+      (
+        Map<String, Map<String, dynamic>> cache,
+        Map<String, dynamic> friend,
+        int index,
+      ) {
+        cache[friend['uid']] = friend;
+        return cache;
+      },
+      <String, Map<String, dynamic>>{},
+    );
+  }
+
   dispose() {
     _friendsOutput.close();
     _friendsFetcher.close();
 
-    _onlineFriends.close();
+    _onlineFriendsFetcher.close();
+    _onlineFriendsOutput.close();
     _onlineFriendsSubscription.cancel();
   }
 }

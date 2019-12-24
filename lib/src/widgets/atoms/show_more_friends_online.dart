@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:messanger/src/blocs/app_bloc_provider.dart';
 import 'package:messanger/src/blocs/friends_bloc.dart';
@@ -12,7 +11,7 @@ class ShowMoreFriendsOnline extends StatelessWidget {
       stream: onlineFriendsBloc.onlineFriends,
       builder: (
         BuildContext context,
-        AsyncSnapshot<List<DocumentSnapshot>> friendsSnapshot,
+        AsyncSnapshot<Map<String, Map<String, dynamic>>> friendsSnapshot,
       ) {
         if (!friendsSnapshot.hasData) {
           return Container();

@@ -15,17 +15,4 @@ class FriendsRepository {
           .snapshots();
     });
   }
-
-  Stream<QuerySnapshot> friendsOnline() {
-    return currentUser.switchMap(
-      (user) {
-        return Firestore.instance
-            .collection('users')
-            .document(user.uid)
-            .collection('friends')
-            .where('status', isEqualTo: 'online')
-            .snapshots();
-      },
-    );
-  }
 }

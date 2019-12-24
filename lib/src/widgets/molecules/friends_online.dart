@@ -13,11 +13,11 @@ class FriendsOnline extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (friendsOnline.length > 10) {
+    if (friendsOnline.length > 0) {
       return ListView.builder(
         shrinkWrap: true,
         physics: ClampingScrollPhysics(),
-        itemCount: 10,
+        itemCount: friendsOnline.length,
         itemBuilder: (BuildContext context, int index) {
           final friendMap = friendsOnline[index];
           return FriendTile(
