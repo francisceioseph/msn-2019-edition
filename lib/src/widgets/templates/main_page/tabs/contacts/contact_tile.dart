@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:messanger/src/constants.dart';
 import 'package:messanger/src/models/user.dart';
 import 'package:messanger/src/widgets/atoms/list_item_subtitle.dart';
 import 'package:messanger/src/widgets/atoms/list_item_subtitle_2.dart';
@@ -9,6 +10,8 @@ class ContactListTile extends StatelessWidget {
   final User user;
 
   ContactListTile({@required this.user});
+
+  get statusColor => kStatusColorMap[user.status] ?? kStatusColorMap['default'];
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +29,7 @@ class ContactListTile extends StatelessWidget {
           children: <Widget>[
             ListItemSubtitle(
               text: user.status,
+              color: statusColor,
             ),
             ListItemSubtitle2(
               text: user.music,

@@ -13,3 +13,12 @@ const kAwayStatusColor = Color(0xffffa726);
 const kInvisibleStatusColor = Color(0xffbdbdbd);
 
 const kFollowingButtonColor = Colors.blue;
+
+const kStatusColorMap = {
+  "$kOnlineStatus": kOnlineStatusColor,
+  "$kOfflineStatus": kOfflineStatusColor,
+  "$kBusyStatus": kBusyStatusColor,
+  "$kAwayStatus": kAwayStatusColor,
+  "$kInvisibleStatus": kInvisibleStatusColor,
+  "default": Colors.transparent,
+};
