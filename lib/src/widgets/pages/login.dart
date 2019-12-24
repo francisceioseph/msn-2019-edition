@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:messanger/src/widgets/login/app_bar.dart';
-import 'package:messanger/src/widgets/login/login_form.dart';
 import 'package:messanger/src/widgets/logo_image.dart';
+import 'package:messanger/src/widgets/molecules/login_app_bar.dart';
+import 'package:messanger/src/widgets/organisms/login_form.dart';
 import 'package:messanger/src/widgets/welcome_section.dart';
 
 class Login extends StatelessWidget {
