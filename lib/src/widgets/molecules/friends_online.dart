@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:messanger/src/models/user.dart';
-import 'package:messanger/src/widgets/main_page/friend_tile.dart';
+import 'package:messanger/src/widgets/atoms/friend_tile.dart';
 import 'package:messanger/src/widgets/molecules/missing_data_indicator.dart';
 
 class FriendsOnline extends StatelessWidget {

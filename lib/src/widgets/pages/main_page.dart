@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:messanger/src/widgets/main_page/app_bar.dart';
-import 'package:messanger/src/widgets/main_page/tabs/calls/calls_tab.dart';
-import 'package:messanger/src/widgets/main_page/tabs/contacts/contacts_tab.dart';
-import 'package:messanger/src/widgets/main_page/tabs/home_tab.dart';
-import 'package:messanger/src/widgets/main_page/tabs/settings/settings_tab.dart';
+import 'package:messanger/src/widgets/molecules/app_bar.dart';
+import 'package:messanger/src/widgets/templates/main_page/tabs/calls/calls_tab.dart';
+import 'package:messanger/src/widgets/templates/main_page/tabs/contacts/contacts_tab.dart';
+import 'package:messanger/src/widgets/templates/main_page/tabs/home_tab.dart';
+import 'package:messanger/src/widgets/templates/main_page/tabs/settings/settings_tab.dart';
 
 class MainPage extends StatelessWidget {
   @override

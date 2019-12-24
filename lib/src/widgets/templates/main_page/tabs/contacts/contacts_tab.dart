@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:messanger/src/widgets/main_page/tabs/contacts/contact_list.dart';
+import 'package:messanger/src/widgets/templates/main_page/tabs/contacts/contact_list.dart';
 
 class ContactsTab extends StatelessWidget {
   @override

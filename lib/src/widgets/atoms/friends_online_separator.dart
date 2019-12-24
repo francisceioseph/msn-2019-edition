@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:messanger/src/blocs/app_bloc_provider.dart';
 import 'package:messanger/src/blocs/friends_bloc.dart';
-import 'package:messanger/src/widgets/main_page/separator.dart';
+import 'package:messanger/src/widgets/atoms/separator.dart';
 
 class FriendsOnlineSeparator extends StatelessWidget {
   @override

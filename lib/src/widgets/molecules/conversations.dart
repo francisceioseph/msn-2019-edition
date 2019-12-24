@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:messanger/src/widgets/main_page/conversation_tile.dart';
+import 'package:messanger/src/widgets/molecules/conversation_tile.dart';
 
 class Conversations extends StatelessWidget {
   final Map<String, Map<String, dynamic>> conversations;
