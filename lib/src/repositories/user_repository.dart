@@ -10,6 +10,6 @@ class UserRepository {
     return Firestore.instance
         .collection('users')
         .document(user.uid)
-        .setData(data);
+        .updateData(data);
   }
 }

@@ -12,8 +12,6 @@ class AppBlocProvider extends InheritedWidget {
   }
 
   static AppBloc of(BuildContext context) {
-    return (context.inheritFromWidgetOfExactType(AppBlocProvider)
-            as AppBlocProvider)
-        .bloc;
+    return context.dependOnInheritedWidgetOfExactType<AppBlocProvider>().bloc;
   }
 }

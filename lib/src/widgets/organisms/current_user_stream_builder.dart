@@ -18,11 +18,15 @@ class CurrentUserStreamBuilder extends StatelessWidget {
     return StreamBuilder(
       stream: bloc.user,
       builder: (BuildContext context, AsyncSnapshot<FirebaseUser> snap) {
-        if (!snap.hasData) {
-          return LoadingIndicator();
+        if (snap.hasData) {
+          return this.builder(context, snap.data);
         }
 
-        return this.builder(context, snap.data);
+        if (snap.hasError) {
+          return Text(snap.error);
+        }
+
+        return LoadingIndicator();
       },
     );
   }
