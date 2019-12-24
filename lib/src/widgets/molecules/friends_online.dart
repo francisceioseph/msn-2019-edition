@@ -29,7 +29,7 @@ class FriendsOnline extends StatelessWidget {
 
     return MissingDataIndicator(
       icon: Icons.signal_wifi_off,
-      message: 'No friends onlien :(',
+      message: 'No friends online :(',
     );
   }
 }
