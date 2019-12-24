@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:messanger/src/widgets/header_switch.dart';
+import 'package:messanger/src/widgets/molecules/header_switch.dart';
 import 'package:messanger/src/widgets/user/user_music_tile.dart';
 
 class UserMusic extends StatelessWidget {

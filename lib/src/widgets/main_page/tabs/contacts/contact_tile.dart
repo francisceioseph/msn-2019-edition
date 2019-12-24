@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:messanger/src/models/user.dart';
-import 'package:messanger/src/widgets/list_item_subtitle.dart';
-import 'package:messanger/src/widgets/list_item_subtitle_2.dart';
-import 'package:messanger/src/widgets/list_item_title.dart';
-import 'package:messanger/src/widgets/status_avatar.dart';
+import 'package:messanger/src/widgets/atoms/list_item_subtitle.dart';
+import 'package:messanger/src/widgets/atoms/list_item_subtitle_2.dart';
+import 'package:messanger/src/widgets/atoms/list_item_title.dart';
+import 'package:messanger/src/widgets/molecules/status_avatar.dart';
 
 class ContactListTile extends StatelessWidget {
   final User user;

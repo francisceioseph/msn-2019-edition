@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:messanger/src/blocs/app_bloc_provider.dart';
 import 'package:messanger/src/blocs/auth_bloc.dart';
+import 'package:messanger/src/widgets/atoms/loader.dart';
 import 'package:messanger/src/widgets/pages/home.dart';
 import 'package:messanger/src/widgets/pages/login.dart';
 import 'package:messanger/src/widgets/pages/main_page.dart';
 import 'package:messanger/src/widgets/pages/register.dart';
 import 'package:messanger/src/themes.dart';
-import 'package:messanger/src/widgets/loader.dart';
 
 class App extends StatelessWidget {
   @override

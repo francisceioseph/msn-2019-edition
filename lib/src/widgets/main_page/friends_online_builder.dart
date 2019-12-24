@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:messanger/src/blocs/app_bloc_provider.dart';
 import 'package:messanger/src/blocs/friends_bloc.dart';
 import 'package:messanger/src/widgets/main_page/friends_online.dart';
-import 'package:messanger/src/widgets/no_friends_yet_indicator.dart';
+import 'package:messanger/src/widgets/molecules/no_friends_yet_indicator.dart';
 
 class FriendsOnlineBuilder extends StatelessWidget {
   @override

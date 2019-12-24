@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:messanger/src/blocs/app_bloc_provider.dart';
 import 'package:messanger/src/blocs/auth_bloc.dart';
-import 'package:messanger/src/widgets/loading_dialog.dart';
+import 'package:messanger/src/widgets/templates/loading_dialog.dart';
 
 class LogoutButton extends StatelessWidget {
   @override

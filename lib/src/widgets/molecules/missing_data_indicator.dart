@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
 
-class NoFriendsYetIndicator extends StatelessWidget {
+class MissingDataIndicator extends StatelessWidget {
+  final IconData icon;
+  final String message;
+
+  MissingDataIndicator({
+    Key key,
+    @required this.icon,
+    @required this.message,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -12,7 +21,7 @@ class NoFriendsYetIndicator extends StatelessWidget {
             bottom: 24,
           ),
           child: Icon(
-            Icons.nature_people,
+            this.icon,
             color: Colors.grey[400],
             size: 80.0,
           ),
@@ -23,7 +32,7 @@ class NoFriendsYetIndicator extends StatelessWidget {
             right: 16,
           ),
           child: Text(
-            'You don\'nt have any friends yet! Add some contacts and start chatting!',
+            this.message,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 18.0,

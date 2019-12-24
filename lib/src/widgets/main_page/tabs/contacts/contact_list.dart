@@ -4,7 +4,7 @@ import 'package:messanger/src/blocs/app_bloc_provider.dart';
 import 'package:messanger/src/blocs/friends_bloc.dart';
 import 'package:messanger/src/models/user.dart';
 import 'package:messanger/src/widgets/main_page/tabs/contacts/contact_tile.dart';
-import 'package:messanger/src/widgets/no_friends_yet_indicator.dart';
+import 'package:messanger/src/widgets/molecules/no_friends_yet_indicator.dart';
 
 class ContactList extends StatelessWidget {
   final List<dynamic> contacts;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:messanger/src/mocks/status.dart';
-import 'package:messanger/src/widgets/header_switch.dart';
+import 'package:messanger/src/widgets/molecules/header_switch.dart';
 
 class UserStatus extends StatelessWidget {
   @override

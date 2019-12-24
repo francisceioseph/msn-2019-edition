@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:messanger/src/models/user.dart';
 import 'package:messanger/src/widgets/main_page/friend_tile.dart';
-import 'package:messanger/src/widgets/no_friends_online_yet_indicator.dart';
+import 'package:messanger/src/widgets/molecules/missing_data_indicator.dart';
 
 class FriendsOnline extends StatelessWidget {
   final List<Map<String, dynamic>> friendsOnline;
@@ -27,6 +27,9 @@ class FriendsOnline extends StatelessWidget {
       );
     }
 
-    return NoFriendsOnlineYetIndicator();
+    return MissingDataIndicator(
+      icon: Icons.signal_wifi_off,
+      message: 'No friends onlien :(',
+    );
   }
 }

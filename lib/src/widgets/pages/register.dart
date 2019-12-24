@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:messanger/src/widgets/logo_image.dart';
+import 'package:messanger/src/widgets/molecules/logo_image.dart';
+import 'package:messanger/src/widgets/molecules/welcome_section.dart';
 import 'package:messanger/src/widgets/organisms/register_form.dart';
-import 'package:messanger/src/widgets/welcome_section.dart';
 
 class Register extends StatelessWidget {
   @override

@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:messanger/src/constants.dart';
-import 'package:messanger/src/widgets/list_item_subtitle.dart';
-import 'package:messanger/src/widgets/list_item_title.dart';
+import 'package:messanger/src/widgets/atoms/list_item_subtitle.dart';
+import 'package:messanger/src/widgets/atoms/list_item_title.dart';
 
 class UserInfo extends StatelessWidget {
   final FirebaseUser user;

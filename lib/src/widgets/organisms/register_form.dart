@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:messanger/src/blocs/app_bloc_provider.dart';
-import 'package:messanger/src/widgets/loading_dialog.dart';
-import 'package:messanger/src/widgets/outline_form_button.dart';
-import 'package:messanger/src/widgets/outline_form_text_field.dart';
+import 'package:messanger/src/widgets/atoms/outline_form_button.dart';
+import 'package:messanger/src/widgets/atoms/outline_form_text_field.dart';
+import 'package:messanger/src/widgets/templates/loading_dialog.dart';
 
 class RegisterForm extends StatefulWidget {
   @override

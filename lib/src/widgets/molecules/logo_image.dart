@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:messanger/src/widgets/circle_container.dart';
+import 'package:messanger/src/widgets/atoms/circle_container.dart';
 
 class LogoImage extends StatelessWidget {
   const LogoImage({
