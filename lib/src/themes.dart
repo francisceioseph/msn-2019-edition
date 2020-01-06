@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 final kLightTheme = ThemeData(
+  brightness: Brightness.light,
   appBarTheme: AppBarTheme(
     color: Colors.white,
   ),
@@ -8,12 +9,26 @@ final kLightTheme = ThemeData(
     title: TextStyle(
       color: Colors.black,
     ),
+    subtitle: TextStyle(
+      fontSize: 12,
+      fontWeight: FontWeight.bold,
+      color: Colors.blue,
+    ),
   ),
 );
 
 final kDarkTheme = ThemeData(
-  appBarTheme: AppBarTheme(
-    color: Colors.black,
-  ),
+  brightness: Brightness.dark,
+  appBarTheme: AppBarTheme(),
   buttonColor: Colors.blue,
+  primaryTextTheme: TextTheme(
+    title: TextStyle(
+      color: Colors.white,
+    ),
+    subtitle: TextStyle(
+      fontSize: 12,
+      fontWeight: FontWeight.bold,
+      color: Colors.white70,
+    ),
+  ),
 );

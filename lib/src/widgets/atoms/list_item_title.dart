@@ -7,7 +7,7 @@ class ListItemTitle extends StatelessWidget {
   ListItemTitle({
     Key key,
     this.text,
-    this.color = Colors.black,
+    this.color,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class ListItemTitle extends StatelessWidget {
       style: TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.bold,
-        color: color,
+        color: color ?? Theme.of(context).textTheme.title.color,
       ),
     );
   }

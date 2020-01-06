@@ -20,10 +20,11 @@ class UserStatus extends StatelessWidget {
     final statuses = statusMocks;
 
     return Container(
-      color: Colors.blueGrey[50],
-      padding: EdgeInsets.only(top: 16, bottom: 16),
+      padding: EdgeInsets.only(
+        top: 16,
+        bottom: 16,
+      ),
       child: Container(
-        color: Colors.white,
         child: Column(
           children: <Widget>[
             HeaderSwitch(
@@ -40,7 +41,16 @@ class UserStatus extends StatelessWidget {
                 return ListTile(
                   title: Text(
                     statusName,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: Theme.of(context)
+                        .primaryTextTheme
+                        .merge(
+                          TextTheme(
+                            body1: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        )
+                        .body1,
                   ),
                   trailing: _renderTrailing(statusId),
                   onTap: () {

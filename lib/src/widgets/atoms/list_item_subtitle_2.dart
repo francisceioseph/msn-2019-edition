@@ -14,11 +14,7 @@ class ListItemSubtitle2 extends StatelessWidget {
     return Text(
       text,
       textAlign: TextAlign.left,
-      style: TextStyle(
-        fontSize: 12,
-        fontWeight: FontWeight.bold,
-        color: color,
-      ),
+      style: Theme.of(context).primaryTextTheme.subtitle,
     );
   }
 }
