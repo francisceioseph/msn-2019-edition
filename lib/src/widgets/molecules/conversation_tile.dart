@@ -14,34 +14,37 @@ class ConversationTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final AttendantModel attendant = conversation.attendants[1];
 
-    return ListTile(
-      leading: StatusAvatar(
-        status: attendant.status,
-      ),
-      title: ListItemTitle(
-        text: attendant.name,
-      ),
-      subtitle: ListItemSubtitle2(
-        text: attendant.music,
-      ),
-      trailing: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Text(
-            'Yesterday',
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.bold,
-              color: Colors.grey[600],
+    return Container(
+      margin: EdgeInsets.only(top: 16),
+      child: ListTile(
+        leading: StatusAvatar(
+          status: attendant.status,
+        ),
+        title: ListItemTitle(
+          text: attendant.name,
+        ),
+        subtitle: ListItemSubtitle2(
+          text: attendant.music,
+        ),
+        trailing: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Text(
+              'Yesterday',
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey[600],
+              ),
             ),
-          ),
-          Icon(
-            Icons.keyboard_arrow_right,
-            color: Colors.grey[300],
-            size: 30.0,
-          ),
-        ],
+            Icon(
+              Icons.keyboard_arrow_right,
+              color: Colors.grey[300],
+              size: 30.0,
+            ),
+          ],
+        ),
       ),
     );
   }
