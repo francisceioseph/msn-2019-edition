@@ -25,6 +25,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   font_awesome_flutter: ^8.4.0
   rxdart: ^0.18.0
+  jiffy: ^2.1.2
   cloud_firestore:
   firebase_auth:
   http:

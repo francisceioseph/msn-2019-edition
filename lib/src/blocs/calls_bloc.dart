@@ -1,16 +1,14 @@
 import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:messanger/src/models/call_model.dart';
 import 'package:messanger/src/repositories/calls_repository.dart';
-import 'package:messanger/src/repositories/user_repository.dart';
 import 'package:rxdart/rxdart.dart';
 
 class CallsBloc {
-  final _callsFetcher = PublishSubject<DocumentSnapshot>();
-  final _callsOutput = BehaviorSubject<Map<String, Map<String, dynamic>>>();
+  final _callsFetcher = PublishSubject<CallModel>();
+  final _callsOutput = BehaviorSubject<Map<String, CallModel>>();
 
-  final UserRepository _userRepository = UserRepository();
   CallsRepository _callsRepository;
   StreamSubscription _callsSubscription;
 
@@ -22,12 +20,11 @@ class CallsBloc {
     });
   }
 
-  Observable<Map<String, Map<String, dynamic>>> get calls =>
-      _callsOutput.stream;
+  Observable<Map<String, CallModel>> get calls => _callsOutput.stream;
 
   fetchChats() {
     _callsRepository.fetchCalls().listen((calls) {
-      calls.documents.forEach((call) {
+      calls.calls.forEach((call) {
         _callsFetcher.sink.add(call);
       });
     });
@@ -36,23 +33,16 @@ class CallsBloc {
   _callTransformer(String uid) {
     return ScanStreamTransformer(
       (
-        Map<String, Map<String, dynamic>> cache,
-        DocumentSnapshot snap,
+        Map<String, CallModel> cache,
+        CallModel call,
         int index,
       ) {
-        final callId = snap.reference.documentID;
-        final data = snap.data;
-        final List<dynamic> attendants = data['attendants'];
-
-        cache[callId] = data;
-        cache[callId]['attendants'] = attendants
-            .where((id) => uid != id)
-            .map((userId) => _userRepository.fetchUser(userId))
-            .toList();
+        final callId = call.id;
+        cache[callId] = call;
 
         return cache;
       },
-      <String, Map<String, dynamic>>{},
+      <String, CallModel>{},
     );
   }
 

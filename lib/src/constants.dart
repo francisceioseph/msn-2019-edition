@@ -22,3 +22,5 @@ const kStatusColorMap = {
   "$kInvisibleStatus": kInvisibleStatusColor,
   "default": Colors.transparent,
 };
+
+const kRootUrl = 'http://10.0.2.2:3000';

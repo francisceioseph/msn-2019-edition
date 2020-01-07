@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:messanger/src/models/conversation.dart';
+import 'package:messanger/src/models/conversation_model.dart';
 import 'package:messanger/src/repositories/chat_repository.dart';
 import 'package:rxdart/rxdart.dart';
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:messanger/src/blocs/app_bloc_provider.dart';
 import 'package:messanger/src/blocs/chat_bloc.dart';
-import 'package:messanger/src/models/conversation.dart';
+import 'package:messanger/src/models/conversation_model.dart';
 import 'package:messanger/src/widgets/molecules/conversations.dart';
 import 'package:messanger/src/widgets/molecules/no_friends_yet_indicator.dart';
 

@@ -6,15 +6,17 @@ final kLightTheme = ThemeData(
     color: Colors.white,
   ),
   primaryTextTheme: TextTheme(
-    title: TextStyle(
-      color: Colors.black,
-    ),
-    subtitle: TextStyle(
-      fontSize: 12,
-      fontWeight: FontWeight.bold,
-      color: Colors.blue,
-    ),
-  ),
+      title: TextStyle(
+        color: Colors.black,
+      ),
+      subtitle: TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.bold,
+        color: Colors.blue,
+      ),
+      body1: TextStyle(
+        color: Colors.black87,
+      )),
 );
 
 final kDarkTheme = ThemeData(
@@ -22,13 +24,15 @@ final kDarkTheme = ThemeData(
   appBarTheme: AppBarTheme(),
   buttonColor: Colors.blue,
   primaryTextTheme: TextTheme(
-    title: TextStyle(
-      color: Colors.white,
-    ),
-    subtitle: TextStyle(
-      fontSize: 12,
-      fontWeight: FontWeight.bold,
-      color: Colors.white70,
-    ),
-  ),
+      title: TextStyle(
+        color: Colors.white,
+      ),
+      subtitle: TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.bold,
+        color: Colors.white70,
+      ),
+      body1: TextStyle(
+        color: Colors.white70,
+      )),
 );

@@ -6,7 +6,7 @@ class AuthRepository {
   Future<FirebaseUser> login(String email, String password) async {
     try {
       return await _auth.signInWithEmailAndPassword(
-          email: email, password: password);
+          email: email.trim(), password: password.trim());
     } catch (e) {
       return e;
     }

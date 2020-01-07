@@ -14,16 +14,19 @@ class FriendsOnline extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (friendsOnline.length > 0) {
-      return ListView.builder(
-        shrinkWrap: true,
-        physics: ClampingScrollPhysics(),
-        itemCount: friendsOnline.length,
-        itemBuilder: (BuildContext context, int index) {
-          final friendMap = friendsOnline[index];
-          return FriendTile(
-            friend: User.fromMap(friendMap),
-          );
-        },
+      return Expanded(
+        flex: 0,
+        child: ListView.builder(
+          shrinkWrap: true,
+          physics: ClampingScrollPhysics(),
+          itemCount: friendsOnline.length,
+          itemBuilder: (BuildContext context, int index) {
+            final friendMap = friendsOnline[index];
+            return FriendTile(
+              friend: User.fromMap(friendMap),
+            );
+          },
+        ),
       );
     }
 
