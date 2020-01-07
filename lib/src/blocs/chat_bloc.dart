@@ -1,16 +1,14 @@
 import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:messanger/src/models/conversation.dart';
 import 'package:messanger/src/repositories/chat_repository.dart';
-import 'package:messanger/src/repositories/user_repository.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ChatBloc {
-  final _chatFetcher = PublishSubject<DocumentSnapshot>();
-  final _chatOutput = BehaviorSubject<Map<String, Map<String, dynamic>>>();
+  final _chatFetcher = PublishSubject<ConversationModel>();
+  final _chatOutput = BehaviorSubject<Map<String, ConversationModel>>();
 
-  final UserRepository _userRepository = UserRepository();
   ChatRepository _chatRepository;
   StreamSubscription _chatsSubscription;
 
@@ -22,11 +20,11 @@ class ChatBloc {
     });
   }
 
-  Observable<Map<String, Map<String, dynamic>>> get chats => _chatOutput.stream;
+  Observable<Map<String, ConversationModel>> get chats => _chatOutput.stream;
 
   fetchChats() {
     _chatRepository.fetchChats().listen((chats) {
-      chats.documents.forEach((chat) {
+      chats.conversations.forEach((chat) {
         _chatFetcher.sink.add(chat);
       });
     });
@@ -35,23 +33,16 @@ class ChatBloc {
   _chatTransformer(String uid) {
     return ScanStreamTransformer(
       (
-        Map<String, Map<String, dynamic>> cache,
-        DocumentSnapshot snap,
+        Map<String, ConversationModel> cache,
+        ConversationModel conversation,
         int index,
       ) {
-        final chatId = snap.reference.documentID;
-        final data = snap.data;
-        final List<dynamic> attendants = data['attendants'];
-
-        cache[chatId] = data;
-        cache[chatId]['attendants'] = attendants
-            .where((id) => uid != id)
-            .map((userId) => _userRepository.fetchUser(userId))
-            .toList();
+        final chatId = conversation.id;
+        cache[chatId] = conversation;
 
         return cache;
       },
-      <String, Map<String, dynamic>>{},
+      <String, ConversationModel>{},
     );
   }
 

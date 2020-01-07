@@ -8,7 +8,7 @@ class LoadingDialog extends StatelessWidget {
         padding: EdgeInsets.all(24),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(10.0)),
-          color: Theme.of(context).primaryColor,
+          color: Theme.of(context).dialogBackgroundColor,
         ),
         child: new Row(
           mainAxisSize: MainAxisSize.min,
