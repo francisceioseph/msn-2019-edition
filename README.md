@@ -41,7 +41,7 @@ samples, guidance on mobile development, and a full API reference.
 - `[-] Nudge!`
 - `[-] Call Screen`
 
-## Screens
+## Screenshots
 
 <img width="200" alt="welcome screen" src="./github-assets/welcome.png">
 <img width="200" alt="sign in screen" src="./github-assets/sign-in.png">
