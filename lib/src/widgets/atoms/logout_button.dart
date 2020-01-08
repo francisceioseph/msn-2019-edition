@@ -41,16 +41,15 @@ class LogoutButton extends StatelessWidget {
             subscription = bloc.user.listen((user) {
               if (user == null) {
                 subscription.cancel();
-                Navigator.of(context).pop();
+
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                  '/',
+                  (_) => false,
+                );
               }
             });
 
             bloc.logout();
-
-            Navigator.of(context).pushNamedAndRemoveUntil(
-              '/login',
-              (_) => false,
-            );
           },
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
