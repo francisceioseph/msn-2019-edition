@@ -7,7 +7,9 @@ import 'package:rxdart/rxdart.dart';
 
 class ChatBloc {
   final _chatFetcher = PublishSubject<ConversationModel>();
-  final _chatOutput = BehaviorSubject<Map<String, ConversationModel>>();
+  final _chatOutput = BehaviorSubject<Map<String, ConversationModel>>(
+    seedValue: {},
+  );
 
   ChatRepository _chatRepository;
   StreamSubscription _chatsSubscription;

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:jiffy/jiffy.dart';
 import 'package:messanger/src/models/call_model.dart';
 import 'package:messanger/src/widgets/atoms/list_item_subtitle_2.dart';
 import 'package:messanger/src/widgets/atoms/list_item_title.dart';
@@ -19,6 +18,7 @@ class CallListTile extends StatelessWidget {
       child: ListTile(
         leading: StatusAvatar(
           status: attendant.status,
+          imageUrl: attendant.imageUrl,
         ),
         title: ListItemTitle(
           text: attendant.name,

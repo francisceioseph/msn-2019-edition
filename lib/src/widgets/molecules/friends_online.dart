@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:messanger/src/models/user.dart';
+import 'package:messanger/src/models/user_model.dart';
 import 'package:messanger/src/widgets/atoms/friend_tile.dart';
 import 'package:messanger/src/widgets/molecules/missing_data_indicator.dart';
 
 class FriendsOnline extends StatelessWidget {
-  final List<Map<String, dynamic>> friendsOnline;
+  final List<UserModel> friendsOnline;
 
   FriendsOnline({
     Key key,
@@ -15,15 +15,14 @@ class FriendsOnline extends StatelessWidget {
   Widget build(BuildContext context) {
     if (friendsOnline.length > 0) {
       return Expanded(
-        flex: 0,
+        flex: 1,
         child: ListView.builder(
           shrinkWrap: true,
           physics: ClampingScrollPhysics(),
           itemCount: friendsOnline.length,
           itemBuilder: (BuildContext context, int index) {
-            final friendMap = friendsOnline[index];
             return FriendTile(
-              friend: User.fromMap(friendMap),
+              friend: friendsOnline[index],
             );
           },
         ),

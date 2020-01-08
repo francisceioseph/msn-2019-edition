@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:messanger/src/models/attendant_model.dart';
+import 'package:messanger/src/models/user_model.dart';
 import 'package:messanger/src/models/conversation_model.dart';
 import 'package:messanger/src/widgets/atoms/list_item_subtitle_2.dart';
 import 'package:messanger/src/widgets/atoms/list_item_title.dart';
@@ -12,13 +12,14 @@ class ConversationTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AttendantModel attendant = conversation.attendants[1];
+    final UserModel attendant = conversation.attendants[1];
 
     return Container(
       margin: EdgeInsets.only(top: 16),
       child: ListTile(
         leading: StatusAvatar(
           status: attendant.status,
+          imageUrl: attendant.imageUrl,
         ),
         title: ListItemTitle(
           text: attendant.name,

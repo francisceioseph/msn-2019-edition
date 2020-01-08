@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:messanger/src/blocs/app_bloc_provider.dart';
 import 'package:messanger/src/blocs/friends_bloc.dart';
+import 'package:messanger/src/models/user_model.dart';
 
 class ShowMoreFriendsOnline extends StatelessWidget {
   @override
@@ -11,7 +12,7 @@ class ShowMoreFriendsOnline extends StatelessWidget {
       stream: onlineFriendsBloc.onlineFriends,
       builder: (
         BuildContext context,
-        AsyncSnapshot<Map<String, Map<String, dynamic>>> friendsSnapshot,
+        AsyncSnapshot<Map<String, UserModel>> friendsSnapshot,
       ) {
         if (!friendsSnapshot.hasData) {
           return Container();

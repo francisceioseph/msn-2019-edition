@@ -16,9 +16,7 @@ class ChatRepository {
   fetchChats() {
     return currentUser.switchMap(
       (user) {
-        final conversations$ = new BehaviorSubject(
-          seedValue: ConversationDataModel(conversations: []),
-        );
+        final conversations$ = new BehaviorSubject();
 
         _client.get('$kRootUrl/conversations/user/${user.uid}').then(
           (response) {

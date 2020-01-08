@@ -10,7 +10,7 @@ class ConversationsBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ChatBloc chatBloc = AppBlocProvider.of(context).chatBloc;
-    chatBloc.fetchChats();
+    _fetchCachedData(chatBloc);
 
     return StreamBuilder(
       stream: chatBloc.chats,
@@ -29,5 +29,13 @@ class ConversationsBuilder extends StatelessWidget {
         );
       },
     );
+  }
+
+  _fetchCachedData(ChatBloc bloc) {
+    bloc.chats.take(1).listen((data) {
+      if (data.length == 0) {
+        bloc.fetchChats();
+      }
+    });
   }
 }

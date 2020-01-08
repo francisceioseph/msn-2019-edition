@@ -33,8 +33,8 @@ class AuthBloc extends Object with ValidationMixin {
 
   void login(String email, String password) async {
     try {
-      final user = await _authRepository.login(email, password);
-      _user.sink.add(user);
+      final result = await _authRepository.login(email, password);
+      _user.sink.add(result.user);
     } catch (e) {
       _user.sink.addError(e);
     }
@@ -42,14 +42,14 @@ class AuthBloc extends Object with ValidationMixin {
 
   void createUser(String name, String email, String password) async {
     try {
-      final FirebaseUser user =
+      final AuthResult result =
           await _authRepository.createUser(email, password);
 
       final UserUpdateInfo updater = UserUpdateInfo();
       updater.displayName = name;
-      await user.updateProfile(updater);
+      await result.user.updateProfile(updater);
 
-      await _userRepository.updateUserInfo(user, {
+      await _userRepository.updateUserInfo(result.user, {
         'name': name,
         'email': email,
         'friends': [],
@@ -57,7 +57,7 @@ class AuthBloc extends Object with ValidationMixin {
         'status': 'online'
       });
 
-      _user.sink.add(user);
+      _user.sink.add(result.user);
     } catch (error) {
       _user.sink.addError(error);
     }

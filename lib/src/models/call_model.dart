@@ -1,9 +1,9 @@
 import 'package:jiffy/jiffy.dart';
-import 'package:messanger/src/models/attendant_model.dart';
+import 'package:messanger/src/models/user_model.dart';
 
 class CallModel {
   final String id;
-  final List<AttendantModel> attendants;
+  final List<UserModel> attendants;
 
   final Jiffy startedAt;
   final Jiffy endedAt;
@@ -36,7 +36,7 @@ class CallModel {
 
   static makeAttendants(List<dynamic> attendants) {
     return attendants
-        .map((attendant) => AttendantModel.fromJson(attendant))
+        .map((attendant) => UserModel.fromJson(attendant))
         .toList();
   }
 }

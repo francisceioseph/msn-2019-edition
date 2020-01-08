@@ -26,6 +26,7 @@ dependencies:
   font_awesome_flutter: ^8.4.0
   rxdart: ^0.18.0
   jiffy: ^2.1.2
+  cached_network_image: ^2.0.0
   cloud_firestore:
   firebase_auth:
   http:

@@ -1,9 +1,9 @@
-import 'package:messanger/src/models/attendant_model.dart';
+import 'package:messanger/src/models/user_model.dart';
 import 'package:messanger/src/models/message_model.dart';
 
 class ConversationModel {
   final String id;
-  final List<AttendantModel> attendants;
+  final List<UserModel> attendants;
   final List<MessageModel> messages;
 
   ConversationModel({
@@ -18,7 +18,7 @@ class ConversationModel {
         messages = makeMessagesListFromJson(json['messages'] ?? []);
 
   static makeAttendantsListFromJson(List<dynamic> attendantsJson) {
-    return attendantsJson.map((json) => AttendantModel.fromJson(json)).toList();
+    return attendantsJson.map((json) => UserModel.fromJson(json)).toList();
   }
 
   static makeMessagesListFromJson(List<dynamic> messagesJson) {

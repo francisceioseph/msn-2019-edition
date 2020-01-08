@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:messanger/src/constants.dart';
-import 'package:messanger/src/models/user.dart';
+import 'package:messanger/src/models/user_model.dart';
 import 'package:messanger/src/widgets/atoms/list_item_subtitle.dart';
 import 'package:messanger/src/widgets/atoms/list_item_subtitle_2.dart';
 import 'package:messanger/src/widgets/atoms/list_item_title.dart';
 import 'package:messanger/src/widgets/molecules/status_avatar.dart';
 
 class ContactListTile extends StatelessWidget {
-  final User user;
+  final UserModel user;
 
   ContactListTile({@required this.user});
 
@@ -20,6 +20,7 @@ class ContactListTile extends StatelessWidget {
       child: ListTile(
         leading: StatusAvatar(
           status: user.status,
+          imageUrl: user.imageUrl,
         ),
         title: ListItemTitle(
           text: user.name,

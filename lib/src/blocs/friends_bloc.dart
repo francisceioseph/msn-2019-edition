@@ -2,20 +2,18 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:messanger/src/models/friends_data_model.dart';
+import 'package:messanger/src/models/user_model.dart';
 import 'package:messanger/src/repositories/friends_repository.dart';
-import 'package:messanger/src/repositories/user_repository.dart';
 import 'package:rxdart/rxdart.dart';
 
 class FriendsBloc {
-  final _userRepository = UserRepository();
+  final _friendsFetcher = PublishSubject<UserModel>();
+  final _friendsOutput = BehaviorSubject<Map<String, UserModel>>(seedValue: {});
 
-  final _friendsFetcher = PublishSubject<String>();
-  final _friendsOutput =
-      BehaviorSubject<Map<String, Stream<DocumentSnapshot>>>();
-
-  final _onlineFriendsFetcher = PublishSubject<Map<String, dynamic>>();
+  final _onlineFriendsFetcher = PublishSubject<UserModel>();
   final _onlineFriendsOutput =
-      BehaviorSubject<Map<String, Map<String, dynamic>>>();
+      BehaviorSubject<Map<String, UserModel>>(seedValue: {});
 
   FriendsRepository _friendsRepository;
   StreamSubscription<QuerySnapshot> _onlineFriendsSubscription;
@@ -23,65 +21,39 @@ class FriendsBloc {
   FriendsBloc(Observable<FirebaseUser> currentUser) {
     _friendsRepository = FriendsRepository(currentUser: currentUser);
     _friendsFetcher.transform(_transformer()).pipe(_friendsOutput);
-    _onlineFriendsFetcher
-        .transform(_onlineFriendsTransformer())
-        .pipe(_onlineFriendsOutput);
+    _onlineFriendsFetcher.transform(_transformer()).pipe(_onlineFriendsOutput);
   }
 
-  Observable<Map<String, Map<String, dynamic>>> get onlineFriends =>
+  Observable<Map<String, UserModel>> get onlineFriends =>
       _onlineFriendsOutput.stream;
 
-  Observable<Map<String, Stream<DocumentSnapshot>>> get friends =>
-      _friendsOutput.stream;
+  Observable<Map<String, UserModel>> get friends => _friendsOutput.stream;
 
   fetchFriends() {
-    _friendsRepository.fetchFriends().listen((snap) {
-      final friends = snap.data['friends'] as List<dynamic>;
+    _friendsRepository.fetchFriends().listen((FriendsDataModel data) {
+      final friends = data.friends;
       friends.forEach(_friendsFetcher.sink.add);
     });
   }
 
   fetchOnlineFriends() {
-    _friendsRepository.fetchFriends().listen((snap) {
-      final friends = snap.data['friends'] as List<dynamic>;
-
-      friends.forEach((friendId) {
-        _userRepository.fetchUser(friendId).listen((userSnap) {
-          final user = userSnap.data;
-          if (user['status'] == 'online') {
-            user['uid'] = friendId;
-            _onlineFriendsFetcher.sink.add(user);
-          }
-        });
-      });
+    _friendsRepository.fetchFriendsOnline().listen((FriendsDataModel data) {
+      final friends = data.friends;
+      friends.forEach(_onlineFriendsFetcher.sink.add);
     });
   }
 
   _transformer() {
     return ScanStreamTransformer(
       (
-        Map<String, Stream<DocumentSnapshot>> cache,
-        String friendId,
+        Map<String, UserModel> cache,
+        UserModel friend,
         int index,
       ) {
-        cache[friendId] = _userRepository.fetchUser(friendId);
+        cache[friend.id] = friend;
         return cache;
       },
-      <String, Stream<DocumentSnapshot>>{},
-    );
-  }
-
-  _onlineFriendsTransformer() {
-    return ScanStreamTransformer(
-      (
-        Map<String, Map<String, dynamic>> cache,
-        Map<String, dynamic> friend,
-        int index,
-      ) {
-        cache[friend['uid']] = friend;
-        return cache;
-      },
-      <String, Map<String, dynamic>>{},
+      <String, UserModel>{},
     );
   }
 

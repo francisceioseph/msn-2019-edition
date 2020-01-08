@@ -7,7 +7,7 @@ import 'package:rxdart/rxdart.dart';
 
 class CallsBloc {
   final _callsFetcher = PublishSubject<CallModel>();
-  final _callsOutput = BehaviorSubject<Map<String, CallModel>>();
+  final _callsOutput = BehaviorSubject<Map<String, CallModel>>(seedValue: {});
 
   CallsRepository _callsRepository;
   StreamSubscription _callsSubscription;

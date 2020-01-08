@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:messanger/src/blocs/app_bloc_provider.dart';
 import 'package:messanger/src/blocs/friends_bloc.dart';
+import 'package:messanger/src/models/user_model.dart';
 import 'package:messanger/src/widgets/atoms/separator.dart';
 
 class FriendsOnlineSeparator extends StatelessWidget {
@@ -13,7 +14,7 @@ class FriendsOnlineSeparator extends StatelessWidget {
       stream: onlineFriendsBloc.onlineFriends,
       builder: (
         BuildContext context,
-        AsyncSnapshot<Map<String, Map<String, dynamic>>> friendsSnapshot,
+        AsyncSnapshot<Map<String, UserModel>> friendsSnapshot,
       ) {
         if (!friendsSnapshot.hasData) {
           return Separator(

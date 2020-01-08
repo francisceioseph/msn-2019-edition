@@ -7,10 +7,21 @@ import 'package:messanger/src/widgets/templates/main_page/tabs/calls/call_list.d
 import 'package:messanger/src/widgets/molecules/no_friends_yet_indicator.dart';
 
 class CallsBuilder extends StatelessWidget {
+  _fetchData(CallsBloc callsBloc) {
+    callsBloc.calls.listen((Map<String, CallModel> data) {
+      print(data.length);
+
+      if (data.length == 0) {
+        callsBloc.fetchChats();
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     CallsBloc callsBloc = AppBlocProvider.of(context).callsBloc;
-    callsBloc.fetchChats();
+
+    _fetchData(callsBloc);
 
     return StreamBuilder(
       stream: callsBloc.calls,
