@@ -18,9 +18,8 @@ class WelcomeSection extends StatelessWidget {
       margin: EdgeInsets.only(
         top: 16,
       ),
-      child: Wrap(
-        alignment: WrapAlignment.center,
-        crossAxisAlignment: WrapCrossAlignment.center,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
             this.welcomeText,

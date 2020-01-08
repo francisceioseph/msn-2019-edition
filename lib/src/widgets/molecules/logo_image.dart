@@ -10,6 +10,8 @@ class LogoImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: CircleContainer(
+        height: 120,
+        width: 120,
         child: CircleAvatar(
           radius: 60,
           backgroundColor: Colors.grey[300],
