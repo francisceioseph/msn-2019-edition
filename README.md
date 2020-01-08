@@ -28,6 +28,9 @@ samples, guidance on mobile development, and a full API reference.
   - Clone this repository
   - run `flutter run` in your terminal
 
+## Demo
+![](./github-assets/app.gif)
+
 ## Features
 - `[X] Firebase Auth`
 - `[X] Bloc Pattern`
