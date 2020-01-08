@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:messanger/src/widgets/atoms/chat_icon_button.dart';
+import 'package:messanger/src/widgets/atoms/nudge_icon_button.dart';
 
 class UserActions extends StatelessWidget {
   @override
@@ -13,9 +15,7 @@ class UserActions extends StatelessWidget {
         child: ButtonBar(
           alignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            IconButton(
-              icon: Icon(Icons.chat),
-              tooltip: 'Chats',
+            ChatIconButton(
               onPressed: () {},
             ),
             IconButton(
@@ -28,9 +28,7 @@ class UserActions extends StatelessWidget {
               tooltip: 'Videocall',
               onPressed: () {},
             ),
-            IconButton(
-              icon: Icon(Icons.vibration),
-              tooltip: 'Nudge',
+            NudgeIconButton(
               onPressed: () {},
             ),
           ],

@@ -6,13 +6,23 @@ import 'package:messanger/src/widgets/atoms/circle_container.dart';
 class StatusAvatar extends StatelessWidget {
   final String imageUrl;
   final String status;
+  final double height;
+  final double width;
 
-  StatusAvatar({Key key, this.imageUrl, this.status}) : super(key: key);
+  StatusAvatar({
+    Key key,
+    this.imageUrl,
+    this.status,
+    this.height = 60,
+    this.width = 60,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: CircleContainer(
+        height: this.height,
+        width: this.width,
         child: CircleAvatar(
           backgroundColor: Colors.grey[300],
           child: _imageForUrl(),

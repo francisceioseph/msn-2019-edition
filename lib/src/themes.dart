@@ -5,6 +5,9 @@ final kLightTheme = ThemeData(
   appBarTheme: AppBarTheme(
     color: Colors.white,
   ),
+  primaryIconTheme: IconThemeData(
+    color: Colors.black,
+  ),
   primaryTextTheme: TextTheme(
       title: TextStyle(
         color: Colors.black,
@@ -23,6 +26,9 @@ final kDarkTheme = ThemeData(
   brightness: Brightness.dark,
   appBarTheme: AppBarTheme(),
   buttonColor: Colors.blue,
+  primaryIconTheme: IconThemeData(
+    color: Colors.white,
+  ),
   primaryTextTheme: TextTheme(
       title: TextStyle(
         color: Colors.white,

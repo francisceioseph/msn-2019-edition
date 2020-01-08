@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:messanger/src/models/chat_page_arguments.dart';
 import 'package:messanger/src/models/user_model.dart';
 import 'package:messanger/src/models/conversation_model.dart';
 import 'package:messanger/src/widgets/atoms/list_item_subtitle_2.dart';
 import 'package:messanger/src/widgets/atoms/list_item_title.dart';
 import 'package:messanger/src/widgets/molecules/status_avatar.dart';
+import 'package:messanger/src/widgets/pages/chat_page.dart';
 
 class ConversationTile extends StatelessWidget {
   final ConversationModel conversation;
 
-  ConversationTile({@required this.conversation});
+  ConversationTile({
+    @required this.conversation,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +21,12 @@ class ConversationTile extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(top: 16),
       child: ListTile(
+        onTap: () {
+          Navigator.of(context).pushNamed(
+            ChatPage.routeName,
+            arguments: ChatPageArguments(conversation: conversation),
+          );
+        },
         leading: StatusAvatar(
           status: attendant.status,
           imageUrl: attendant.imageUrl,
