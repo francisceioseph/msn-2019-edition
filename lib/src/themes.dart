@@ -5,6 +5,7 @@ final kLightTheme = ThemeData(
   appBarTheme: AppBarTheme(
     color: Colors.white,
   ),
+  buttonColor: Colors.blue,
   primaryIconTheme: IconThemeData(
     color: Colors.black,
   ),

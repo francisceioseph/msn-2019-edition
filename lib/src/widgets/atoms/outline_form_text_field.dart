@@ -8,9 +8,11 @@ class OutlineFormTextField extends StatelessWidget {
   final String Function(String) validator;
   final void Function(String) onFieldSubmitted;
   final void Function(String) onFieldSaved;
+  final void Function(String) onChanged;
   final TextInputType keyboardType;
   final TextInputAction textInputAction;
   final bool obscureText;
+  final int maxLines;
 
   OutlineFormTextField({
     Key key,
@@ -23,6 +25,8 @@ class OutlineFormTextField extends StatelessWidget {
     this.textInputAction = TextInputAction.done,
     this.onFieldSubmitted,
     this.onFieldSaved,
+    this.onChanged,
+    this.maxLines = 1,
   }) : super(key: key);
 
   @override
@@ -32,35 +36,41 @@ class OutlineFormTextField extends StatelessWidget {
         top: 4,
         bottom: 4,
       ),
-      child: TextFormField(
-        validator: this.validator,
-        obscureText: this.obscureText,
-        keyboardType: this.keyboardType,
-        textInputAction: this.textInputAction,
-        focusNode: this.focusNode,
-        onFieldSubmitted: this.onFieldSubmitted,
-        onSaved: this.onFieldSaved,
-        decoration: InputDecoration(
-          hintText: this.hintText,
-          labelText: this.labelText,
-          focusedBorder: OutlineInputBorder(
-            borderRadius: const BorderRadius.all(Radius.circular(12.0)),
-            borderSide: BorderSide(color: Colors.blue),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: const BorderRadius.all(Radius.circular(12.0)),
-            borderSide: BorderSide(color: Colors.grey),
-          ),
-          errorBorder: OutlineInputBorder(
-            borderRadius: const BorderRadius.all(Radius.circular(12.0)),
-            borderSide: BorderSide(color: Colors.red),
-          ),
-          focusedErrorBorder: OutlineInputBorder(
-            borderRadius: const BorderRadius.all(Radius.circular(12.0)),
-            borderSide: BorderSide(color: Colors.red),
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          maxHeight: 80,
+        ),
+        child: TextFormField(
+          maxLines: this.maxLines,
+          validator: this.validator,
+          obscureText: this.obscureText,
+          keyboardType: this.keyboardType,
+          textInputAction: this.textInputAction,
+          focusNode: this.focusNode,
+          onFieldSubmitted: this.onFieldSubmitted,
+          onSaved: this.onFieldSaved,
+          onChanged: this.onChanged,
+          decoration: InputDecoration(
+            hintText: this.hintText,
+            labelText: this.labelText,
+            contentPadding: EdgeInsets.symmetric(
+              vertical: 10,
+              horizontal: 10,
+            ),
+            focusedBorder: _borderDecoration(Colors.blue),
+            enabledBorder: _borderDecoration(Colors.grey),
+            errorBorder: _borderDecoration(Colors.red),
+            focusedErrorBorder: _borderDecoration(Colors.red),
           ),
         ),
       ),
+    );
+  }
+
+  _borderDecoration(Color color) {
+    return OutlineInputBorder(
+      borderRadius: const BorderRadius.all(Radius.circular(12.0)),
+      borderSide: BorderSide(color: color),
     );
   }
 }

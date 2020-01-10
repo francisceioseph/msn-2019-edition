@@ -7,6 +7,7 @@ import 'package:messanger/src/widgets/atoms/nudge_icon_button.dart';
 import 'package:messanger/src/widgets/atoms/typeface_icon_button.dart';
 import 'package:messanger/src/widgets/molecules/chat_app_bar.dart';
 import 'package:messanger/src/widgets/molecules/messages_list.dart';
+import 'package:messanger/src/widgets/organisms/message_form.dart';
 
 class ChatPage extends StatelessWidget {
   static const String routeName = '/chat';
@@ -26,9 +27,19 @@ class ChatPage extends StatelessWidget {
         ),
       ),
       body: Container(
-        child: MessageList(
-          messages: conversation.messages,
-          currentUserId: conversation.attendants[0].id,
+        child: Column(
+          children: <Widget>[
+            Expanded(
+              child: MessageList(
+                messages: conversation.messages,
+                currentUserId: conversation.attendants[0].id,
+              ),
+            ),
+            Expanded(
+              flex: 0,
+              child: MessageForm(),
+            )
+          ],
         ),
       ),
       bottomNavigationBar: Row(
