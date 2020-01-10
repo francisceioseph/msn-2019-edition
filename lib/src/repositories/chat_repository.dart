@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:messanger/src/constants.dart';
 import 'package:messanger/src/models/conversation_data_model.dart';
+import 'package:messanger/src/models/message_model.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:http/http.dart' show Client;
 
@@ -18,17 +19,31 @@ class ChatRepository {
       (user) {
         final conversations$ = new BehaviorSubject();
 
-        _client.get('$kRootUrl/conversations/user/${user.uid}').then(
+        _client.get(_chatUrl(user.uid)).then(
           (response) {
             final data = json.decode(response.body);
             final datasource = ConversationDataModel.fromJson(data);
-            conversations$.sink.add(datasource);
+            conversations$.add(datasource);
           },
         );
 
         return conversations$;
       },
     );
+  }
+
+  postMessage(MessageModel message) {
+    return currentUser.switchMap((user) {
+      final message$ = new BehaviorSubject();
+
+      _client.post(_chatUrl(user.uid), body: message).then((response) {
+        final data = json.decode(response.body);
+        final datasource = MessageModel.fromJson(data);
+        message$.add(datasource);
+      });
+
+      return message$;
+    });
   }
 
   Observable<DocumentSnapshot> fetchChat(String chatId) {
@@ -40,5 +55,9 @@ class ChatRepository {
             .snapshots();
       },
     );
+  }
+
+  String _chatUrl(String uid) {
+    return '$kRootUrl/conversations/user/$uid';
   }
 }
